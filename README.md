@@ -5,18 +5,6 @@ A complete, single-file **Machine Learning course** — Beginner to Advanced —
 **Prepared by SAIPK**
 **Contact:** [saipk2026@gmail.com](mailto:saipk2026@gmail.com)
 
----
-
-## 🔗 Live Demo
-
-Once uploaded to GitHub Pages, your course will be live at:
-
-```
-https://<your-github-username>.github.io/<repo-name>/
-```
-
-(GitHub Pages automatically serves `index.html`, which is already included in this repo.)
-
 ## 📂 Files
 
 | File | Purpose |
@@ -38,13 +26,6 @@ https://<your-github-username>.github.io/<repo-name>/
 - Every chapter includes: a plain-language explanation, a "why this matters" box, a real-world example, an SVG diagram, and a code snippet with **line-by-line explanations**.
 - Fully responsive, holographic UI with a scroll-spy sidebar and reading progress bar — built with plain HTML/CSS/JS, no external framework required.
 - **SAIPK branding** — logo mark in the sidebar and a full brand block (logo, "SAIPK@support", tagline) in the footer, alongside the contact email.
-
-## 🚀 How to Publish on GitHub Pages
-
-1. Create a new repository on GitHub and upload all files from this folder (or `git init` this folder and push it).
-2. In the repository, go to **Settings → Pages**.
-3. Under **Source**, select the `main` branch and `/ (root)` folder, then **Save**.
-4. Wait a minute — your course will be live at `https://<your-username>.github.io/<repo-name>/`.
 
 ## 🛠️ How to Use Locally
 

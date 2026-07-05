@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="SAIPK">
+<meta name="description" content="Machine Learning course, Beginner to Advanced, in simple Roman Urdu with holographic design. Prepared by SAIPK.">
+<title>Machine Learning Mastery — Beginner to Advanced (Holographic Course) | by SAIPK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark:#05050f;
+  --bg-dark2:#0a0a1f;
+  --neon-cyan:#00fff2;
+  --neon-magenta:#ff00e5;
+  --neon-purple:#9d4edd;
+  --neon-blue:#3a86ff;
+  --neon-green:#39ff88;
+  --glass-bg:rgba(255,255,255,0.045);
+  --glass-bg2:rgba(255,255,255,0.07);
+  --glass-border:rgba(255,255,255,0.14);
+  --text-light:#eaf6ff;
+  --text-dim:#a9b4c9;
+  --text-dimmer:#7d87a0;
+  --sidebar-w:300px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg-dark);
+  color:var(--text-light);
+  font-family:'Poppins',sans-serif;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.brand,.chapter-num{font-family:'Orbitron',sans-serif;}
+
+/* ===== Holographic animated background ===== */
+.bg-holo{
+  position:fixed; inset:0; z-index:-2; overflow:hidden; background:var(--bg-dark);
+}
+.bg-holo::before{
+  content:''; position:absolute; inset:-20%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0,255,242,0.16), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255,0,229,0.14), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(157,78,221,0.18), transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(58,134,255,0.14), transparent 40%);
+  animation:holoDrift 18s ease-in-out infinite alternate;
+  filter:blur(40px);
+}
+.bg-holo::after{
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(circle at 50% 30%, black, transparent 75%);
+}
+@keyframes holoDrift{
+  0%{transform:translate(0,0) rotate(0deg) scale(1);}
+  50%{transform:translate(3%,-2%) rotate(8deg) scale(1.08);}
+  100%{transform:translate(-3%,3%) rotate(-6deg) scale(1.03);}
+}
+
+/* ===== Holographic text ===== */
+.holo-text{
+  background:linear-gradient(120deg,#00fff2,#ff00e5,#9d4edd,#3a86ff,#39ff88,#00fff2);
+  background-size:300% 300%;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:holoShift 7s ease infinite;
+}
+@keyframes holoShift{
+  0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;}
+}
+
+/* ===== Layout ===== */
+#menuToggle{
+  position:fixed; top:18px; left:18px; z-index:60;
+  width:46px; height:46px; border-radius:50%;
+  background:var(--glass-bg2); border:1px solid var(--glass-border);
+  color:var(--neon-cyan); font-size:20px; cursor:pointer;
+  backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center;
+  box-shadow:0 0 15px rgba(0,255,242,0.25);
+}
+#sidebar{
+  position:fixed; top:0; left:0; height:100vh; width:var(--sidebar-w);
+  background:rgba(6,6,18,0.85); backdrop-filter:blur(14px);
+  border-right:1px solid var(--glass-border);
+  overflow-y:auto; padding:26px 16px 60px; z-index:50;
+  scrollbar-width:thin; scrollbar-color:var(--neon-purple) transparent;
+}
+#sidebar::-webkit-scrollbar{width:6px;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--neon-purple); border-radius:10px;}
+.brand{
+  font-size:20px; font-weight:900; letter-spacing:1px; margin:4px 0 6px 8px;
+}
+.brand span{display:block; font-family:'Poppins'; font-size:11px; font-weight:400; color:var(--text-dimmer); letter-spacing:2px;}
+.progress-wrap{
+  margin:14px 8px 20px; height:6px; border-radius:10px; background:rgba(255,255,255,0.08); overflow:hidden;
+}
+#progressBar{height:100%; width:0%; background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta),var(--neon-purple)); transition:width .2s ease;}
+.nav-cat{
+  margin-top:18px; padding:6px 8px; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--neon-cyan); opacity:.85; font-weight:600;
+}
+#sidebar a{
+  display:block; color:var(--text-dim); text-decoration:none; font-size:13.5px;
+  padding:8px 10px 8px 16px; border-left:2px solid transparent; border-radius:6px; margin:2px 0;
+  transition:all .2s ease;
+}
+#sidebar a:hover{color:var(--text-light); background:rgba(255,255,255,0.04); border-left-color:var(--neon-purple);}
+#sidebar a.active{color:var(--neon-cyan); border-left-color:var(--neon-cyan); background:rgba(0,255,242,0.06); text-shadow:0 0 8px rgba(0,255,242,0.5);}
+#sidebar a.res-link{color:var(--neon-green); font-weight:600;}
+
+main{margin-left:var(--sidebar-w); padding:0 0 100px; position:relative; z-index:1;}
+
+/* ===== Hero ===== */
+.hero{
+  min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:40px 24px; position:relative;
+}
+.hero .badge{
+  display:inline-block; padding:8px 20px; border:1px solid var(--glass-border); border-radius:30px;
+  background:var(--glass-bg); font-size:12.5px; letter-spacing:2px; color:var(--neon-cyan); margin-bottom:26px;
+  box-shadow:0 0 20px rgba(0,255,242,0.15);
+}
+.hero h1{font-size:clamp(32px,6vw,64px); margin:0 0 18px; font-weight:900; line-height:1.15;}
+.hero p.sub{max-width:720px; color:var(--text-dim); font-size:17px; margin:0 auto 30px;}
+.hero .cta{display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
+.btn{
+  padding:14px 30px; border-radius:12px; text-decoration:none; font-weight:600; font-size:14.5px;
+  transition:transform .25s ease, box-shadow .25s ease; display:inline-block;
+}
+.btn-primary{background:linear-gradient(120deg,var(--neon-cyan),var(--neon-purple)); color:#03030a; box-shadow:0 0 25px rgba(157,78,221,0.45);}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 0 35px rgba(157,78,221,0.7);}
+.btn-ghost{border:1px solid var(--glass-border); color:var(--text-light); background:var(--glass-bg);}
+.btn-ghost:hover{border-color:var(--neon-cyan); color:var(--neon-cyan);}
+
+.hero-stats{display:flex; gap:36px; flex-wrap:wrap; justify-content:center; margin-top:56px;}
+.stat{text-align:center;}
+.stat b{display:block; font-family:'Orbitron'; font-size:26px; color:var(--neon-cyan);}
+.stat span{font-size:12px; color:var(--text-dimmer); letter-spacing:1px;}
+
+/* ===== Sections generic ===== */
+section.wrap{max-width:980px; margin:0 auto; padding:70px 28px;}
+.section-head{margin-bottom:34px;}
+.section-head .eyebrow{color:var(--neon-magenta); font-size:12.5px; letter-spacing:3px; text-transform:uppercase; font-weight:600;}
+.section-head h2{font-size:clamp(26px,4vw,40px); margin:8px 0 12px;}
+.section-head p{color:var(--text-dim); font-size:15.5px; max-width:720px;}
+
+/* ===== Cards / glass ===== */
+.card{
+  background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:18px;
+  padding:26px; backdrop-filter:blur(12px);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.02), 0 10px 40px rgba(0,0,0,0.35);
+}
+.grid{display:grid; gap:20px;}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+
+/* Resource cards */
+.res-card{
+  border-radius:18px; padding:22px; background:var(--glass-bg); border:1px solid var(--glass-border);
+  position:relative; overflow:hidden; transition:transform .25s ease, border-color .25s ease;
+}
+.res-card::before{
+  content:''; position:absolute; top:-40%; left:-40%; width:60%; height:180%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform:rotate(20deg); transition:left .5s ease;
+}
+.res-card:hover{transform:translateY(-4px); border-color:var(--neon-cyan);}
+.res-card:hover::before{left:120%;}
+.res-icon{font-size:28px; margin-bottom:10px; display:block;}
+.res-card h4{margin:0 0 8px; font-size:16.5px; color:var(--text-light);}
+.res-tag{
+  display:inline-block; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--neon-purple);
+  border:1px solid rgba(157,78,221,0.4); padding:3px 9px; border-radius:20px; margin-bottom:10px;
+}
+.res-card p{color:var(--text-dim); font-size:13.8px; margin:0 0 8px;}
+.res-card .use{color:var(--neon-green); font-size:12.8px;}
+
+/* ===== Chapter blocks ===== */
+.chapter-section{border-top:1px solid rgba(255,255,255,0.07); padding-top:70px;}
+.chapter-tag{
+  display:inline-flex; align-items:center; gap:10px; color:var(--neon-cyan); font-size:12.5px;
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; font-weight:600;
+}
+.chapter-num{
+  width:34px; height:34px; border-radius:50%; border:1px solid var(--neon-cyan);
+  display:inline-flex; align-items:center; justify-content:center; font-size:14px; color:var(--neon-cyan);
+  box-shadow:0 0 12px rgba(0,255,242,0.35);
+}
+.chapter-section h2{font-size:clamp(24px,3.6vw,34px); margin:0 0 20px;}
+.chapter-section h3{font-size:19px; color:var(--neon-purple); margin:30px 0 12px;}
+.chapter-section p{color:var(--text-dim); font-size:15.5px; margin:0 0 16px;}
+.chapter-section ul, .chapter-section ol{color:var(--text-dim); font-size:15px; padding-left:22px;}
+.chapter-section li{margin-bottom:8px;}
+.chapter-section strong{color:var(--text-light);}
+
+.why-box{
+  background:linear-gradient(135deg, rgba(255,0,229,0.08), rgba(157,78,221,0.06));
+  border:1px solid rgba(255,0,229,0.3); border-radius:16px; padding:18px 22px; margin:20px 0;
+}
+.why-box .label{color:var(--neon-magenta); font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; display:block;}
+.why-box p{margin:0; color:var(--text-light); font-size:14.5px;}
+
+.example-box{
+  background:rgba(57,255,136,0.05); border:1px solid rgba(57,255,136,0.3); border-radius:16px; padding:18px 22px; margin:20px 0;
+}
+.example-box .label{color:var(--neon-green); font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; display:block;}
+.example-box p{margin:0; color:var(--text-light); font-size:14.5px;}
+
+.diagram-box{
+  background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:18px; padding:22px; margin:22px 0; text-align:center;
+}
+.diagram-box svg{max-width:100%; height:auto;}
+.diagram-caption{color:var(--text-dimmer); font-size:12.5px; margin-top:10px;}
+
+.code-box{
+  background:#07070f; border:1px solid var(--glass-border); border-radius:16px; margin:22px 0; overflow:hidden;
+}
+.code-box .code-head{
+  display:flex; align-items:center; justify-content:space-between; padding:10px 18px;
+  background:rgba(255,255,255,0.03); border-bottom:1px solid var(--glass-border);
+  font-size:12px; color:var(--text-dimmer); letter-spacing:1px;
+}
+.code-box pre{margin:0; padding:20px; overflow-x:auto; font-size:13.3px; line-height:1.7;}
+.code-box code{font-family:'Courier New',monospace; color:#c9e8ff;}
+.tok-kw{color:#ff7edb;} .tok-str{color:#39ff88;} .tok-com{color:#7d87a0; font-style:italic;} .tok-fn{color:#00fff2;} .tok-num{color:#ffd166;}
+
+.line-explain{
+  list-style:none; padding:0; margin:16px 0 0; border-top:1px dashed var(--glass-border); padding-top:14px;
+}
+.line-explain li{
+  display:flex; gap:10px; margin-bottom:10px; font-size:13.8px; color:var(--text-dim);
+}
+.line-explain .ln{
+  flex-shrink:0; background:rgba(0,255,242,0.1); color:var(--neon-cyan); font-family:'Courier New',monospace;
+  font-size:12px; padding:2px 8px; border-radius:6px; height:fit-content;
+}
+
+.takeaway-box{
+  background:linear-gradient(135deg, rgba(0,255,242,0.06), rgba(58,134,255,0.06));
+  border:1px solid rgba(0,255,242,0.3); border-radius:16px; padding:20px 24px; margin-top:26px;
+}
+.takeaway-box .label{color:var(--neon-cyan); font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; display:block;}
+
+table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14px;}
+th,td{padding:10px 14px; text-align:left; border-bottom:1px solid var(--glass-border); color:var(--text-dim);}
+th{color:var(--neon-cyan); font-weight:600; letter-spacing:.5px;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+
+.tags-row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 26px;}
+.pill{padding:6px 14px; border-radius:20px; font-size:12px; border:1px solid var(--glass-border); color:var(--text-dim);}
+
+footer{
+  text-align:center; padding:60px 24px 40px; color:var(--text-dimmer); font-size:13px; border-top:1px solid var(--glass-border); margin-top:60px;
+}
+footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
+
+@media(max-width:900px){
+  #sidebar{transform:translateX(-100%); transition:transform .3s ease; box-shadow:0 0 40px rgba(0,0,0,0.6);}
+  #sidebar.open{transform:translateX(0);}
+  main{margin-left:0;}
+  #menuToggle{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-holo"></div>
+<button id="menuToggle">☰</button>
+
+<nav id="sidebar">
+  <div class="brand holo-text">ML MASTERY <span>Beginner → Advanced</span></div>
+  <div class="progress-wrap"><div id="progressBar"></div></div>
+  <a href="#top" class="res-link">🏠 Shuru (Home)</a>
+  <a href="#resources" class="res-link">🧰 Resources (Pehle Ye Parhein)</a>
+
+  <div class="nav-cat">A. Bunyaad (Foundations)</div>
+  <a href="#ml-kya-hai">1. Machine Learning Kya Hai?</a>
+  <a href="#types-of-ml">2. ML Ki Types</a>
+  <a href="#ml-workflow">3. ML Workflow / Pipeline</a>
+  <a href="#math-prerequisites">4. Math Prerequisites</a>
+  <a href="#python-for-ml">5. Python for ML</a>
+
+  <div class="nav-cat">B. Data Ki Tayari</div>
+  <a href="#data-preprocessing">6. Data Preprocessing</a>
+  <a href="#eda">7. Exploratory Data Analysis</a>
+  <a href="#feature-engineering">8. Feature Engineering</a>
+
+  <div class="nav-cat">C. Supervised Learning</div>
+  <a href="#regression">9. Regression</a>
+  <a href="#classification">10. Classification</a>
+  <a href="#evaluation-metrics">11. Evaluation Metrics</a>
+  <a href="#overfitting-regularization">12. Overfitting &amp; Regularization</a>
+  <a href="#cross-validation-tuning">13. Cross-Validation &amp; Tuning</a>
+
+  <div class="nav-cat">D. Unsupervised Learning</div>
+  <a href="#clustering">14. Clustering</a>
+  <a href="#dimensionality-reduction">15. Dimensionality Reduction</a>
+  <a href="#association-rules">16. Association Rules</a>
+
+  <div class="nav-cat">E. Advanced / Deep Learning</div>
+  <a href="#neural-networks">17. Neural Networks</a>
+  <a href="#dl-frameworks">18. Deep Learning Frameworks</a>
+  <a href="#cnn">19. CNN (Images)</a>
+  <a href="#rnn-lstm">20. RNN &amp; LSTM (Sequences)</a>
+  <a href="#nlp-transformers">21. NLP &amp; Transformers</a>
+  <a href="#ensemble-learning">22. Ensemble Learning</a>
+  <a href="#reinforcement-learning">23. Reinforcement Learning</a>
+
+  <div class="nav-cat">F. Practical &amp; Career</div>
+  <a href="#model-deployment">24. Model Deployment</a>
+  <a href="#end-to-end-project">25. End-to-End Project</a>
+  <a href="#ml-ethics">26. ML Ethics</a>
+  <a href="#career-roadmap">27. Career Roadmap</a>
+</nav>
+
+<main>
+
+<header class="hero" id="top">
+  <div class="badge">⬡ 27 CHAPTERS · BEGINNER → ADVANCED · HOLOGRAPHIC EDITION</div>
+  <h1 class="holo-text">Machine Learning<br>Mastery Course</h1>
+  <p class="sub">Ye ek complete Machine Learning course hai jo <strong style="color:#eaf6ff">asan Roman Urdu</strong> mein likha gaya hai — bilkul shuru (ML kya hai) se lekar advanced Deep Learning aur real-world deployment tak. Har chapter mein: concept ki simple explanation, ye "kyun zaroori hai", real-life example, diagram, aur line-by-line explain kiya hua code milega.</p>
+  <div class="cta">
+    <a href="#resources" class="btn btn-primary">Resources Se Shuru Karein →</a>
+    <a href="#ml-kya-hai" class="btn btn-ghost">Seedha Chapter 1 Pe Jayein</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><b>27</b><span>CHAPTERS</span></div>
+    <div class="stat"><b>6</b><span>CATEGORIES</span></div>
+    <div class="stat"><b>15+</b><span>RESOURCES EXPLAINED</span></div>
+    <div class="stat"><b>0</b><span>JARGON BINA EXPLAIN</span></div>
+  </div>
+</header>
+
+<section class="wrap" id="resources">
+  <div class="section-head">
+    <span class="eyebrow">Course Shuru Karne Se Pehle</span>
+    <h2 class="holo-text">Resources — Ye Kya Hain Aur Kyun Zaroori Hain?</h2>
+    <p>Course start karne se pehle apna "toolbox" tayyar karna zaroori hai. Neeche har us tool, library, website aur kitaab ka intro diya gaya hai jo is course mein use hoga — <strong style="color:#eaf6ff">ye cheez hai kya</strong> aur <strong style="color:#eaf6ff">kis kaam ke liye use hoti hai</strong>. Agar aap in sab ko install/samajh kar rakhein ge, to aage ke chapters follow karna bohot asan ho jayega.</p>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye section kyun zaroori hai</span>
+    <p>Bohot se log ML seekhte waqt seedha "algorithms" pe chale jate hain aur unko pata nahi hota ke code kis software mein likhna hai, data kahan se milega, ya practice kahan karein. Isi wajah se woh beech mein confuse ho kar chor dete hain. Ye resources section is confusion ko khatam karta hai — pehle apna environment samjho, phir concepts seekho.</p>
+  </div>
+
+  <h3 style="color:var(--neon-cyan); margin-top:40px;">🖥️ Programming Language &amp; Environment</h3>
+  <div class="grid grid-3">
+    <div class="res-card">
+      <span class="res-icon">🐍</span>
+      <span class="res-tag">Language</span>
+      <h4>Python</h4>
+      <p>Ye sabse popular programming language hai jo ML/AI ke liye use hoti hai kyunke iski syntax simple hai aur iske paas hazaron ready-made ML libraries maujood hain.</p>
+      <p class="use">Use: Poora course isi language mein hoga — data load karna, model banana, sab kuch Python se hoga.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">📓</span>
+      <span class="res-tag">Environment</span>
+      <h4>Jupyter Notebook</h4>
+      <p>Ye ek interactive coding environment hai jahan aap code ko chhote chhote "cells" mein likh kar turant result dekh sakte hain (jaise graph, table, output).</p>
+      <p class="use">Use: Data explore karne aur model train karte waqt step-by-step result dekhne ke liye — ML mein sabse zyada isi mein kaam hota hai.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">☁️</span>
+      <span class="res-tag">Cloud Platform</span>
+      <h4>Google Colab</h4>
+      <p>Ye Google ka free online Jupyter Notebook hai jo browser mein chalta hai — kuch install karne ki zaroorat nahi, aur muft mein GPU bhi milta hai.</p>
+      <p class="use">Use: Jab aapke computer mein Python install na ho, ya Deep Learning models train karne ke liye tez GPU chahiye ho, tab Colab use karein.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">📦</span>
+      <span class="res-tag">Package Manager</span>
+      <h4>Anaconda</h4>
+      <p>Ye ek bada software package hai jo Python aur ML ki zyada tar zaroori libraries ko ek hi baar mein, aasani se install kar deta hai.</p>
+      <p class="use">Use: Apne computer par local ML environment set up karne ke liye — alag alag projects ke liye alag "environments" banane mein madad karta hai.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🧩</span>
+      <span class="res-tag">Code Editor</span>
+      <h4>VS Code</h4>
+      <p>Ye ek free code editor hai jisme Python aur Jupyter Notebooks dono aasani se likhe aur chalaye ja sakte hain, aur ye code ko rangeen (highlight) kar ke dikhata hai.</p>
+      <p class="use">Use: Bade projects likhne, files organize karne aur Git ke saath kaam karne ke liye.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--neon-cyan); margin-top:40px;">📚 Core Data &amp; ML Libraries</h3>
+  <div class="grid grid-3">
+    <div class="res-card">
+      <span class="res-icon">🔢</span>
+      <span class="res-tag">Library</span>
+      <h4>NumPy</h4>
+      <p>Ye library numbers ke bade arrays (jinhe "matrices" bhi kehte hain) par tezi se riyazi (math) calculations karne ke liye banai gayi hai.</p>
+      <p class="use">Use: ML ke andar har data aakhir mein numbers ki shakal mein hi hota hai — NumPy inhi numbers ko handle karta hai.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🗂️</span>
+      <span class="res-tag">Library</span>
+      <h4>Pandas</h4>
+      <p>Ye library data ko table (rows/columns) ki shakal mein rakhne aur clean/organize karne ke liye use hoti hai — Excel jaisa kaam Python mein.</p>
+      <p class="use">Use: CSV files load karna, missing values dhoondna, columns filter karna — data preprocessing ka mukhya tool.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">📊</span>
+      <span class="res-tag">Library</span>
+      <h4>Matplotlib &amp; Seaborn</h4>
+      <p>Ye do libraries data ko graphs, charts aur plots ki shakal mein dikhane ke liye use hoti hain, taake data ko "aankhon se" samjha ja sake.</p>
+      <p class="use">Use: Exploratory Data Analysis (Chapter 7) mein data ke patterns dekhne ke liye.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🤖</span>
+      <span class="res-tag">Library</span>
+      <h4>Scikit-learn</h4>
+      <p>Ye sabse mashhoor "classical" Machine Learning library hai jisme Regression, Classification, Clustering jaise sab algorithms pehle se ready milte hain.</p>
+      <p class="use">Use: Chapter 9 se 16 tak zyada tar model isi library se banaye jayenge.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🔶</span>
+      <span class="res-tag">Framework</span>
+      <h4>TensorFlow / Keras</h4>
+      <p>TensorFlow Google ka Deep Learning framework hai, aur Keras iske upar bani ek asan-si layer jo Neural Networks banana bohot simple bana deti hai.</p>
+      <p class="use">Use: Chapter 17 se aage — Neural Networks, CNN aur RNN banane ke liye.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🔥</span>
+      <span class="res-tag">Framework</span>
+      <h4>PyTorch</h4>
+      <p>Ye Meta (Facebook) ka Deep Learning framework hai jo research aur advanced projects mein bohot popular hai kyunke ye zyada flexible hai.</p>
+      <p class="use">Use: Advanced Deep Learning aur NLP chapters mein alternative framework ke taur par zikar hoga.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--neon-cyan); margin-top:40px;">🌐 Data, Practice &amp; Deployment Platforms</h3>
+  <div class="grid grid-3">
+    <div class="res-card">
+      <span class="res-icon">🏆</span>
+      <span class="res-tag">Platform</span>
+      <h4>Kaggle</h4>
+      <p>Ye ek website hai jahan free datasets, notebooks, aur ML competitions milti hain jahan log apni skills practice kar sakte hain.</p>
+      <p class="use">Use: Practice datasets dhoondne aur real projects banane ke liye — beginners ke liye sabse acha platform.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🗄️</span>
+      <span class="res-tag">Dataset Source</span>
+      <h4>UCI ML Repository</h4>
+      <p>Ye ek purani aur trusted website hai jahan sainkron free, clean datasets milte hain jo research aur learning ke liye use hote hain.</p>
+      <p class="use">Use: Chapter ke examples ke liye ready-made datasets (jaise Iris, Titanic) yahin se aate hain.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🐙</span>
+      <span class="res-tag">Version Control</span>
+      <h4>GitHub</h4>
+      <p>Ye ek platform hai jahan code save, share aur track kiya jata hai — jab code mein tabdeeli aati hai to iski history bhi rehti hai.</p>
+      <p class="use">Use: Apne ML projects ko online rakhne, portfolio banane aur doosron ke saath collaborate karne ke liye.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🚀</span>
+      <span class="res-tag">Deployment</span>
+      <h4>Flask / FastAPI</h4>
+      <p>Ye Python frameworks hain jinse aap apne trained ML model ko ek "web service" (API) banakar duniya ke liye available kar sakte hain.</p>
+      <p class="use">Use: Chapter 24 (Model Deployment) mein model ko real app banane ke liye.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--neon-cyan); margin-top:40px;">📖 Learning Material (Math, Books &amp; Courses)</h3>
+  <div class="grid grid-3">
+    <div class="res-card">
+      <span class="res-icon">➗</span>
+      <span class="res-tag">Math</span>
+      <h4>Khan Academy</h4>
+      <p>Ye free website hai jahan Linear Algebra, Statistics aur Calculus jaisi ML ki bunyaadi math bilkul shuru se, asan videos mein sikhai jati hai.</p>
+      <p class="use">Use: Chapter 4 (Math Prerequisites) ko aur gehrai se samajhne ke liye.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🎥</span>
+      <span class="res-tag">Visual Math</span>
+      <h4>3Blue1Brown (YouTube)</h4>
+      <p>Ye YouTube channel Linear Algebra aur Neural Networks ko khoobsurat animations ke zariye visually samjhata hai, jo cheezein "click" karwa deta hai.</p>
+      <p class="use">Use: Neural Networks (Chapter 17) aur math ko intuitively samajhne ke liye.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">📘</span>
+      <span class="res-tag">Book</span>
+      <h4>Hands-On Machine Learning (Aurélien Géron)</h4>
+      <p>Ye ek mashhoor kitaab hai jisme Scikit-learn, Keras aur TensorFlow ka amali (practical) use sikhaya gaya hai, misalon ke saath.</p>
+      <p class="use">Use: Is course ke saath saath detailed reference ke taur par parhi ja sakti hai.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">🎓</span>
+      <span class="res-tag">Course</span>
+      <h4>Andrew Ng — Machine Learning Specialization</h4>
+      <p>Ye Coursera par mojood ek duniya-bhar mein maani jaane wali course hai jo ML ke theory aur math ko bohot ache tareeqe se samjhati hai.</p>
+      <p class="use">Use: Is course ke baad, theory ko aur mazboot karne ke liye agla step.</p>
+    </div>
+    <div class="res-card">
+      <span class="res-icon">📄</span>
+      <span class="res-tag">Documentation</span>
+      <h4>Official Docs (scikit-learn, TensorFlow, PyTorch)</h4>
+      <p>Har library ki apni official website hoti hai jahan har function ka poora detail aur examples diye hote hain.</p>
+      <p class="use">Use: Jab kisi function ka use samajh na aaye, seedha docs mein check karein — ye sabse authentic source hoti hai.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Quick Setup Checklist</span>
+    <p>1) Python install karein (ya seedha Google Colab use karein — kuch install nahi karna padta) &nbsp;•&nbsp; 2) NumPy, Pandas, Matplotlib, Scikit-learn install/import karna seekh lein &nbsp;•&nbsp; 3) Kaggle par account bana lein taake practice datasets mil sakein &nbsp;•&nbsp; 4) GitHub account bana lein apna kaam save karne ke liye.</p>
+  </div>
+
+</section>
+
+<section class="wrap chapter-section" id="ml-kya-hai">
+  <span class="chapter-tag"><span class="chapter-num">1</span> Category A — Bunyaad</span>
+  <h2>Machine Learning Kya Hai?</h2>
+
+  <p>Normal programming mein hum computer ko <strong>fixed rules</strong> khud likh kar dete hain — jaise "agar temperature 40°C se zyada ho to 'garmi hai' likho". Lekin Machine Learning (ML) mein hum computer ko rules nahi dete, balke bohot sara <strong>data (misalein)</strong> dete hain, aur computer khud data se pattern seekh kar apna "rule" bana leta hai. Yani ML ek aisa tareeqa hai jisme computer <em>tajurbe (data)</em> se seekhta hai, bilkul jaise insan misalon se seekhta hai.</p>
+
+  <p>Iska sabse asan formula: <strong>Traditional Programming = Rules + Data → Answers</strong>, jabke <strong>Machine Learning = Data + Answers → Rules</strong>. Yani ML khud hi wo rule dhoond leta hai jo hum ne khud likhna hota tha.</p>
+
+  <h3>AI, ML aur Deep Learning mein farak</h3>
+  <p>Ye teeno terms aksar aapas mein ghal-mil jate hain, lekin inka rishta simple hai: <strong>Artificial Intelligence (AI)</strong> sabse bara concept hai — koi bhi machine jo "insaan jaisi zehanat" dikhaye. <strong>Machine Learning (ML)</strong> AI ka ek hissa hai jisme machine data se seekhti hai. <strong>Deep Learning (DL)</strong> ML ka ek khaas hissa hai jisme "Neural Networks" (Chapter 17) use hoti hain, jo bade data aur complex problems (jaise image recognition) ke liye behtareen hain.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="160" r="130" fill="rgba(0,255,242,0.06)" stroke="#00fff2" stroke-width="1.5"/>
+      <circle cx="250" cy="180" r="90" fill="rgba(255,0,229,0.07)" stroke="#ff00e5" stroke-width="1.5"/>
+      <circle cx="250" cy="200" r="50" fill="rgba(157,78,221,0.12)" stroke="#9d4edd" stroke-width="1.5"/>
+      <text x="250" y="55" text-anchor="middle" fill="#00fff2" font-size="16" font-family="Orbitron">Artificial Intelligence</text>
+      <text x="250" y="110" text-anchor="middle" fill="#ff00e5" font-size="14" font-family="Orbitron">Machine Learning</text>
+      <text x="250" y="203" text-anchor="middle" fill="#eaf6ff" font-size="12.5" font-family="Orbitron">Deep</text>
+      <text x="250" y="219" text-anchor="middle" fill="#eaf6ff" font-size="12.5" font-family="Orbitron">Learning</text>
+    </svg>
+    <p class="diagram-caption">AI sabse bara daira hai, ML uska hissa hai, aur Deep Learning ML ka khaas hissa hai.</p>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bohot se real-world problems itne complex hote hain ke unke liye rules likhna namumkin hota hai — jaise "ye email spam hai ya nahi" ya "is tasveer mein billi hai ya kutta". Insaan har case ke liye rule nahi likh sakta, isi liye hum data se khud seekhne wala system banate hain. Yehi ML ki bunyaadi wajah-e-wujood hai.</p>
+  </div>
+
+  <div class="example-box">
+    <span class="label">💡 Real-Life Example</span>
+    <p>Jab Gmail khud batata hai ke koi email "Spam" hai, ya Netflix apko wahi movies suggest karta hai jo aapko pasand aa sakti hain — ye sab ML ka kamal hai. In systems ko kabhi "agar ye lafz aaye to spam karo" jaisa rule nahi diya gaya — inhone lakhon purani emails/dekhi hui movies se khud pattern seekha hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Machine Learning = data se seekhna, rules khud banana. AI sab se bara term hai, ML uska hissa, aur Deep Learning ML ka advanced hissa hai jo Neural Networks use karta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="types-of-ml">
+  <span class="chapter-tag"><span class="chapter-num">2</span> Category A — Bunyaad</span>
+  <h2>Machine Learning Ki Types</h2>
+  <p>ML ko is baat ke hisaab se categorize kiya jata hai ke hum computer ko data kis tarah dete hain, aur usse kya seekhne ko kehte hain. Char (4) mukhya types hain:</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="30" width="140" height="150" rx="14" fill="rgba(0,255,242,0.07)" stroke="#00fff2"/>
+      <text x="80" y="70" text-anchor="middle" fill="#00fff2" font-size="13" font-family="Orbitron">Supervised</text>
+      <text x="80" y="95" text-anchor="middle" fill="#a9b4c9" font-size="10.5">Labeled Data</text>
+      <text x="80" y="145" text-anchor="middle" fill="#eaf6ff" font-size="24">🏷️</text>
+
+      <rect x="165" y="30" width="140" height="150" rx="14" fill="rgba(255,0,229,0.07)" stroke="#ff00e5"/>
+      <text x="235" y="70" text-anchor="middle" fill="#ff00e5" font-size="13" font-family="Orbitron">Unsupervised</text>
+      <text x="235" y="95" text-anchor="middle" fill="#a9b4c9" font-size="10.5">No Labels</text>
+      <text x="235" y="145" text-anchor="middle" fill="#eaf6ff" font-size="24">🔍</text>
+
+      <rect x="320" y="30" width="140" height="150" rx="14" fill="rgba(157,78,221,0.1)" stroke="#9d4edd"/>
+      <text x="390" y="70" text-anchor="middle" fill="#9d4edd" font-size="13" font-family="Orbitron">Semi-Supervised</text>
+      <text x="390" y="95" text-anchor="middle" fill="#a9b4c9" font-size="10.5">Some Labels</text>
+      <text x="390" y="145" text-anchor="middle" fill="#eaf6ff" font-size="24">🧩</text>
+
+      <rect x="475" y="30" width="140" height="150" rx="14" fill="rgba(57,255,136,0.07)" stroke="#39ff88"/>
+      <text x="545" y="70" text-anchor="middle" fill="#39ff88" font-size="13" font-family="Orbitron">Reinforcement</text>
+      <text x="545" y="95" text-anchor="middle" fill="#a9b4c9" font-size="10.5">Reward/Punishment</text>
+      <text x="545" y="145" text-anchor="middle" fill="#eaf6ff" font-size="24">🎮</text>
+    </svg>
+    <p class="diagram-caption">ML ki 4 mukhya types — data ki nature ke hisaab se</p>
+  </div>
+
+  <h3>1. Supervised Learning</h3>
+  <p>Is mein hum computer ko aisa data dete hain jisme <strong>input aur uska sahi jawab (label)</strong> dono maujood hote hain — jaise "ghar ka size + uski asal price". Model in misalon se seekh kar naye ghar ki price predict karna seekh leta hai.</p>
+
+  <h3>2. Unsupervised Learning</h3>
+  <p>Is mein data ke saath koi label/jawab nahi hota. Model khud data mein chupe patterns ya groups dhoondta hai — jaise customers ko unki shopping habits ke hisaab se groups mein baantna, bina pehle se bataye ke groups kya honge.</p>
+
+  <h3>3. Semi-Supervised Learning</h3>
+  <p>Ye dono ka mixture hai — thora sa data labeled hota hai aur baqi bohot sara unlabeled. Ye tab useful hota hai jab labeling mehngi ya time-consuming ho (jaise medical images ko doctor se label karwana).</p>
+
+  <h3>4. Reinforcement Learning (RL)</h3>
+  <p>Is mein ek "agent" (jaise game khelne wala AI) apne environment mein actions leta hai, aur achay actions par "reward" aur ghalat par "punishment" milti hai. Waqt ke saath agent seekh leta hai ke kaunse actions zyada reward dilate hain.</p>
+
+  <table>
+    <tr><th>Type</th><th>Data</th><th>Example</th></tr>
+    <tr><td>Supervised</td><td>Input + Correct Label</td><td>House price prediction, spam detection</td></tr>
+    <tr><td>Unsupervised</td><td>Sirf Input, koi label nahi</td><td>Customer segmentation</td></tr>
+    <tr><td>Semi-Supervised</td><td>Thora labeled + zyada unlabeled</td><td>Medical image classification</td></tr>
+    <tr><td>Reinforcement</td><td>Reward/Punishment signals</td><td>Game-playing AI, self-driving cars</td></tr>
+  </table>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Har real-world problem ek alag "type" mein aata hai. Agar aap galat type ka algorithm choose kar lein (jaise labeled data na hone ke bawajood Supervised algorithm try karein), to model kaam hi nahi karega. Isi liye sabse pehle ye pehchanna zaroori hai ke aapke paas kis qisam ka data hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Supervised = labels ke saath seekhna. Unsupervised = bina labels ke patterns dhoondna. Semi-Supervised = mix. Reinforcement = reward/punishment se seekhna. Ye course zyada tar Supervised aur Unsupervised par focus karega, saath hi Reinforcement Learning ka intro bhi milega (Chapter 23).</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="ml-workflow">
+  <span class="chapter-tag"><span class="chapter-num">3</span> Category A — Bunyaad</span>
+  <h2>Machine Learning Workflow / Pipeline</h2>
+  <p>Koi bhi ML project random tareeqe se nahi banaya jata — iske liye ek fixed "workflow" follow kiya jata hai taake koi zaroori step chhoot na jaye. Ye workflow har chapter ke aage aane wale concepts ka "naqsha (map)" hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="10.5" fill="#eaf6ff" text-anchor="middle">
+        <rect x="5" y="35" width="100" height="55" rx="10" fill="rgba(0,255,242,0.09)" stroke="#00fff2"/>
+        <text x="55" y="67">Data Collect</text>
+        <rect x="125" y="35" width="100" height="55" rx="10" fill="rgba(255,0,229,0.09)" stroke="#ff00e5"/>
+        <text x="175" y="60">Pre-</text><text x="175" y="73">processing</text>
+        <rect x="245" y="35" width="100" height="55" rx="10" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/>
+        <text x="295" y="67">EDA</text>
+        <rect x="365" y="35" width="100" height="55" rx="10" fill="rgba(58,134,255,0.1)" stroke="#3a86ff"/>
+        <text x="415" y="60">Model</text><text x="415" y="73">Training</text>
+        <rect x="485" y="35" width="100" height="55" rx="10" fill="rgba(57,255,136,0.09)" stroke="#39ff88"/>
+        <text x="535" y="60">Evalu-</text><text x="535" y="73">ation</text>
+        <rect x="605" y="35" width="90" height="55" rx="10" fill="rgba(255,209,102,0.1)" stroke="#ffd166"/>
+        <text x="650" y="67">Deploy</text>
+      </g>
+      <g stroke="#7d87a0" stroke-width="1.5" marker-end="url(#arrow)">
+        <line x1="105" y1="62" x2="123" y2="62"/>
+        <line x1="225" y1="62" x2="243" y2="62"/>
+        <line x1="345" y1="62" x2="363" y2="62"/>
+        <line x1="465" y1="62" x2="483" y2="62"/>
+        <line x1="585" y1="62" x2="603" y2="62"/>
+      </g>
+      <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">Ek typical Machine Learning pipeline — end se end tak</p>
+  </div>
+
+  <ol>
+    <li><strong>Problem Definition:</strong> Sabse pehle ye clear karna ke hum kya predict/solve karna chahte hain.</li>
+    <li><strong>Data Collection:</strong> Zaroori data ikatha karna (CSV files, database, APIs, ya web se).</li>
+    <li><strong>Data Preprocessing:</strong> Data ko saaf karna — missing values, ghalat entries theek karna (Chapter 6).</li>
+    <li><strong>EDA (Exploratory Data Analysis):</strong> Data ko graphs/tables se samajhna (Chapter 7).</li>
+    <li><strong>Feature Engineering:</strong> Naye useful columns banana ya behtar banana (Chapter 8).</li>
+    <li><strong>Model Selection &amp; Training:</strong> Sahi algorithm choose karke usay data par train karna.</li>
+    <li><strong>Evaluation:</strong> Model kitna acha kaam kar raha hai ye metrics se check karna (Chapter 11).</li>
+    <li><strong>Hyperparameter Tuning:</strong> Model ki settings behtar banana (Chapter 13).</li>
+    <li><strong>Deployment:</strong> Model ko real app/website mein use ke liye taiyar karna (Chapter 24).</li>
+    <li><strong>Monitoring:</strong> Model ko waqt ke saath monitor karna taake performance kam na ho.</li>
+  </ol>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Naye log aksar seedha "model training" par chale jate hain aur data cleaning/understanding ko skip kar dete hain — jiski wajah se model achi performance nahi deta. Ek fixed workflow follow karne se koi step miss nahi hota aur project systematically complete hota hai.</p>
+  </div>
+
+  <div class="example-box">
+    <span class="label">💡 Real-Life Example</span>
+    <p>Maan lein hum "ghar ki price predict" karna chahte hain: Problem define hua (price predict karni hai) → Data collect hua (purane ghar size, location, price) → Preprocessing hui (missing prices wale rows hataye) → EDA se pata chala size aur price ka rishta → Model train hua → Evaluation se pata chala model 90% accurate hai → Deploy kiya taake log website par apne ghar ki price check kar sakein.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Har ML project ek fixed pipeline follow karta hai: Data → Clean → Explore → Features → Train → Evaluate → Tune → Deploy → Monitor. Ye course isi tarteeb mein aage badhega.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="math-prerequisites">
+  <span class="chapter-tag"><span class="chapter-num">4</span> Category A — Bunyaad</span>
+  <h2>Math Prerequisites (Bunyaadi Riyazi)</h2>
+  <p>Aap bina advanced math ke bhi ML libraries use kar sakte hain, lekin agar aap ye samajhna chahte hain ke <strong>"model andar se kaam kaise karta hai"</strong>, to teen cheezein zaroor samajhni chahiye. Ye is course mein bilkul asan tareeqe se, sirf itna zaroori hisse tak explain hongi.</p>
+
+  <h3>1. Linear Algebra — Vectors aur Matrices</h3>
+  <p>ML mein data hamesha numbers ki shakal mein rakha jata hai — ek row (jaise ek ghar ki details: size, rooms, price) ko "vector" kehte hain, aur poora dataset (bohot saari rows) ek "matrix" banata hai. Linear Algebra hume batati hai ke in numbers ke groups par operations (jama, zarb) kaise ki jaati hain.</p>
+
+  <h3>2. Statistics &amp; Probability</h3>
+  <p>Mean (average), Median, Standard Deviation (data kitna phaila hua hai) jaise concepts data ko samajhne mein madad karte hain. Probability hume batati hai ke koi event kitne chance se hoga — ye Naive Bayes jaisi classification algorithms ki bunyaad hai.</p>
+
+  <h3>3. Calculus — Gradient / Derivative</h3>
+  <p>Jab model training hoti hai, to usay apni "galti" (error) kam karni hoti hai. Derivative (rate of change) hume batata hai ke agar hum model ki settings thori si badlein, to error kitna kam/zyada hoga. Isi principle par "Gradient Descent" (Chapter 9) kaam karta hai, jo tقریبا har ML algorithm ke andar chupa hota hai.</p>
+
+  <table>
+    <tr><th>Math Topic</th><th>Kahan Use Hota Hai</th></tr>
+    <tr><td>Vectors / Matrices</td><td>Data ko represent karne ke liye</td></tr>
+    <tr><td>Mean / Std Dev</td><td>Data samajhne aur scale karne ke liye (Chapter 6)</td></tr>
+    <tr><td>Probability</td><td>Naive Bayes, model confidence, evaluation metrics</td></tr>
+    <tr><td>Derivative / Gradient</td><td>Model training (Gradient Descent) ke liye</td></tr>
+  </table>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bina math samjhe bhi aap <code>model.fit()</code> likh sakte hain, lekin jab model achi performance nahi dega ya koi error samajh nahi aayega, tab yehi bunyaadi math concepts aapko wajah samajhne mein madad denge. Isko "black box se guru banane wala" gyaan samjhein.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Linear Algebra data ko represent karta hai, Statistics data ko samajhta hai, aur Calculus (gradient) model ko "seekhne" mein madad karta hai. In teeno ka basic intuition kaafi hai — PhD level math zaroori nahi.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="python-for-ml">
+  <span class="chapter-tag"><span class="chapter-num">5</span> Category A — Bunyaad</span>
+  <h2>Python for Machine Learning</h2>
+  <p>Is course mein hum Python use karenge kyunke iski syntax simple hai aur ML ki tamam mashhoor libraries (NumPy, Pandas, Scikit-learn) isi zaban mein bani hain. Neeche do sabse zaroori libraries ka basic use dikhaya gaya hai.</p>
+
+  <h3>NumPy — Numbers Ke Arrays</h3>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>numpy_basics.py</span></div>
+    <pre><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+
+data = np.array([<span class="tok-num">10</span>, <span class="tok-num">20</span>, <span class="tok-num">30</span>, <span class="tok-num">40</span>])
+<span class="tok-fn">print</span>(data.mean())   <span class="tok-com"># average nikalta hai</span>
+<span class="tok-fn">print</span>(data.std())    <span class="tok-com"># data ka phailaav (spread) batata hai</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> NumPy library ko <code>np</code> ke naam se import kiya — taake har baar poora naam na likhna paray.</li>
+      <li><span class="ln">L3</span> Ek NumPy array banaya jisme 4 numbers hain — ye ek "vector" hai (Chapter 4 wala concept).</li>
+      <li><span class="ln">L4</span> <code>.mean()</code> function sab numbers ka average nikal kar deta hai — data ko samajhne ka pehla qadam.</li>
+      <li><span class="ln">L5</span> <code>.std()</code> batata hai data ek dusre se kitna alag/phaila hua hai.</li>
+    </ol>
+  </div>
+
+  <h3>Pandas — Data Ko Table Ki Tarah Handle Karna</h3>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>pandas_basics.py</span></div>
+    <pre><code><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+
+df = pd.read_csv(<span class="tok-str">"houses.csv"</span>)   <span class="tok-com"># CSV file ko table ki tarah load karo</span>
+<span class="tok-fn">print</span>(df.head())               <span class="tok-com"># pehli 5 rows dikhao</span>
+<span class="tok-fn">print</span>(df[<span class="tok-str">"price"</span>].mean()) <span class="tok-com"># price column ka average</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Pandas library ko <code>pd</code> ke naam se import kiya.</li>
+      <li><span class="ln">L3</span> <code>read_csv()</code> se "houses.csv" file ko ek "DataFrame" (table) mein load kiya — variable ka naam <code>df</code> rakha (DataFrame ka short form).</li>
+      <li><span class="ln">L4</span> <code>.head()</code> table ki shuru ki 5 rows dikhata hai, taake data ka andaza ho sake bina poori file khole.</li>
+      <li><span class="ln">L5</span> <code>df["price"]</code> se sirf "price" naam ka column nikala, aur uska average nikala.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Har ML project ka pehla amali (practical) qadam data ko load karna aur dekhna hota hai. Agar aapko NumPy/Pandas ki ye basic commands nahi aatin, to aage ke tamam chapters ka code samajhna mushkil ho jayega — isi liye ye "zaban" pehle seekhna zaroori hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>NumPy numbers ke arrays par fast math karta hai, Pandas data ko table (rows/columns) ki tarah handle karta hai. Ye dono is poore course mein baar baar use honge.</p>
+  </div>
+</section>
+
+
+<section class="wrap chapter-section" id="data-preprocessing">
+  <span class="chapter-tag"><span class="chapter-num">6</span> Category B — Data Ki Tayari</span>
+  <h2>Data Preprocessing (Data Ki Safai)</h2>
+  <p>Real duniya ka data kabhi bhi "perfect" nahi hota — usmein missing values, ghalat entries, aur alag alag scales ke numbers hote hain. Data Preprocessing woh qadam hai jisme hum is gande (raw) data ko model ke istemal ke qabil banate hain.</p>
+
+  <h3>1. Missing Values Handle Karna</h3>
+  <p>Kabhi kabhi data mein khaali jagah (missing values) hoti hain — jaise kisi ghar ki "size" column khaali ho. Do tareeqe hain: <strong>Drop</strong> (us row/column ko hata dena) ya <strong>Impute</strong> (khaali jagah ko mean/median/mode se bhar dena).</p>
+
+  <h3>2. Categorical Encoding</h3>
+  <p>ML models sirf numbers samajhte hain, text nahi. Isi liye "Male/Female" ya "Red/Blue/Green" jaise text columns ko numbers mein badalna parta hai — isay <strong>Encoding</strong> kehte hain. Do mashhoor tareeqe: <strong>Label Encoding</strong> (har category ko ek number dena, jaise Red=0, Blue=1) aur <strong>One-Hot Encoding</strong> (har category ke liye alag 0/1 column banana).</p>
+
+  <h3>3. Feature Scaling</h3>
+  <p>Agar ek column "age" (0-100) hai aur dusra "salary" (0-1,00,000) hai, to model salary ko zyada ahmiyat de sakta hai sirf iski wajah se ke uske numbers bade hain. Scaling se sab columns ko ek jaisi range mein le aate hain — jaise <strong>Normalization</strong> (0 se 1 ke beech) ya <strong>Standardization</strong> (mean 0, std dev 1).</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Poppins" font-size="11" fill="#eaf6ff">
+        <rect x="20" y="20" width="250" height="110" rx="12" fill="rgba(255,0,229,0.08)" stroke="#ff00e5"/>
+        <text x="145" y="40" text-anchor="middle" fill="#ff00e5" font-family="Orbitron" font-size="12">RAW DATA</text>
+        <text x="35" y="65">Size: 1200, NaN, 900</text>
+        <text x="35" y="85">City: "Lahore","Karachi"</text>
+        <text x="35" y="105">Price: 5000000, 12000</text>
+
+        <rect x="330" y="20" width="250" height="110" rx="12" fill="rgba(0,255,242,0.08)" stroke="#00fff2"/>
+        <text x="455" y="40" text-anchor="middle" fill="#00fff2" font-family="Orbitron" font-size="12">CLEANED DATA</text>
+        <text x="345" y="65">Size: 0.6, 0.55, 0.4</text>
+        <text x="345" y="85">City_Lahore: 1, 0</text>
+        <text x="345" y="105">Price: 0.9, 0.1</text>
+      </g>
+      <line x1="275" y1="75" x2="325" y2="75" stroke="#7d87a0" stroke-width="2" marker-end="url(#arrow2)"/>
+      <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">Preprocessing se pehle aur baad ka data</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>preprocessing.py</span></div>
+    <pre><code><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+<span class="tok-kw">from</span> sklearn.preprocessing <span class="tok-kw">import</span> StandardScaler
+
+df = pd.read_csv(<span class="tok-str">"houses.csv"</span>)
+df[<span class="tok-str">"size"</span>] = df[<span class="tok-str">"size"</span>].fillna(df[<span class="tok-str">"size"</span>].mean())  <span class="tok-com"># missing size ko average se bharo</span>
+
+df = pd.get_dummies(df, columns=[<span class="tok-str">"city"</span>])   <span class="tok-com"># one-hot encoding</span>
+
+scaler = StandardScaler()
+df[[<span class="tok-str">"size"</span>,<span class="tok-str">"price"</span>]] = scaler.fit_transform(df[[<span class="tok-str">"size"</span>,<span class="tok-str">"price"</span>]])  <span class="tok-com"># scaling</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> Data ko CSV se load kiya.</li>
+      <li><span class="ln">L5</span> <code>fillna()</code> se "size" column ki khaali jagah us column ke average se bhar di — taake koi row zaya na ho.</li>
+      <li><span class="ln">L7</span> <code>get_dummies()</code> "city" jaise text column ko multiple 0/1 columns mein badal deta hai (One-Hot Encoding).</li>
+      <li><span class="ln">L9-10</span> <code>StandardScaler</code> "size" aur "price" ko ek jaisi range mein le aata hai taake model kisi ek column ko galat tarah zyada wazan na de.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ye ML ki mashhoor kehawat hai: <strong>"Garbage In, Garbage Out"</strong> — agar data ganda hai to chahe aap kitna acha algorithm use karein, result kharab hi aayega. Isi liye experienced ML engineers apna 70-80% waqt data preprocessing mein hi lagate hain, model banane mein nahi.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Missing values ko fill/drop karo, text columns ko encoding se numbers banao, aur sab columns ko scaling se barabar range mein lao. Ye teeno steps har project mein zaroori hain.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="eda">
+  <span class="chapter-tag"><span class="chapter-num">7</span> Category B — Data Ki Tayari</span>
+  <h2>Exploratory Data Analysis (EDA)</h2>
+  <p>Model banane se pehle data ko "samajhna" bohot zaroori hai. EDA ka matlab hai data ko graphs, tables aur statistics ke zariye explore karna — taake patterns, relationships aur ajeeb (unusual) values pehle hi pata chal jayein.</p>
+
+  <h3>Univariate Analysis (Ek Column)</h3>
+  <p>Ek waqt mein sirf ek column ko dekhna — jaise "price" column ka <strong>histogram</strong> bana kar dekhna ke zyada tar ghar kis price range mein hain.</p>
+
+  <h3>Bivariate Analysis (Do Columns Ka Rishta)</h3>
+  <p>Do columns ke darmiyan rishta dekhna — jaise "size" barhne se "price" kaise badalta hai, iske liye <strong>scatter plot</strong> use hota hai.</p>
+
+  <h3>Correlation Heatmap</h3>
+  <p>Ye ek rangeen table hoti hai jo batati hai ke kaunsi columns aapas mein zyada related hain (correlation 1 ke qareeb) aur kaunsi bilkul unrelated (0 ke qareeb).</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <line x1="40" y1="150" x2="460" y2="150" stroke="#7d87a0"/>
+        <line x1="40" y1="20" x2="40" y2="150" stroke="#7d87a0"/>
+        <circle cx="80" cy="120" r="5" fill="#00fff2"/>
+        <circle cx="140" cy="100" r="5" fill="#00fff2"/>
+        <circle cx="190" cy="90" r="5" fill="#00fff2"/>
+        <circle cx="230" cy="70" r="5" fill="#00fff2"/>
+        <circle cx="280" cy="60" r="5" fill="#00fff2"/>
+        <circle cx="330" cy="45" r="5" fill="#00fff2"/>
+        <circle cx="380" cy="35" r="5" fill="#00fff2"/>
+        <circle cx="420" cy="25" r="5" fill="#00fff2"/>
+        <text x="250" y="172" text-anchor="middle" fill="#a9b4c9" font-size="11">House Size →</text>
+        <text x="18" y="90" fill="#a9b4c9" font-size="11" transform="rotate(-90,18,90)">Price →</text>
+      </g>
+    </svg>
+    <p class="diagram-caption">Scatter plot: size barhte hi price bhi barh rahi hai — ek positive rishta</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>eda.py</span></div>
+    <pre><code><span class="tok-kw">import</span> seaborn <span class="tok-kw">as</span> sns
+<span class="tok-kw">import</span> matplotlib.pyplot <span class="tok-kw">as</span> plt
+
+sns.histplot(df[<span class="tok-str">"price"</span>])   <span class="tok-com"># price ki distribution dekho</span>
+plt.show()
+
+sns.scatterplot(x=<span class="tok-str">"size"</span>, y=<span class="tok-str">"price"</span>, data=df)  <span class="tok-com"># size vs price rishta</span>
+plt.show()
+
+sns.heatmap(df.corr(), annot=<span class="tok-kw">True</span>)   <span class="tok-com"># sab columns ka aapas ka rishta</span>
+plt.show()</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> <code>histplot</code> "price" column ke values ki distribution (kaunsi values zyada bar aa rahi hain) dikhata hai.</li>
+      <li><span class="ln">L7</span> <code>scatterplot</code> do columns (size, price) ke beech rishta dots ki shakal mein dikhata hai.</li>
+      <li><span class="ln">L10</span> <code>df.corr()</code> sab numeric columns ke darmiyan correlation (rishte ki mazbooti) calculate karta hai, aur <code>heatmap</code> usay rangon se dikhata hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bina EDA ke seedha model train karna aisa hai jaise bina map dekhe safar shuru karna. EDA se hume pehle hi pata chal jata hai ke kaunse features important hain, kahan outliers hain, aur model se kya expect karna chahiye.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>EDA = data ko graphs se "dekhna" aur samajhna. Histogram ek column dikhata hai, scatter plot do columns ka rishta, aur heatmap sab columns ke rishtay ek sath.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="feature-engineering">
+  <span class="chapter-tag"><span class="chapter-num">8</span> Category B — Data Ki Tayari</span>
+  <h2>Feature Engineering</h2>
+  <p>Feature Engineering ka matlab hai raw data se aise naye columns (features) banana jo model ki prediction behtar banayein. Ye ML ka woh hissa hai jahan "insaan ki samajh" sabse zyada farak dalti hai.</p>
+
+  <h3>Naye Features Banana</h3>
+  <p>Misaal: agar data mein "date of birth" hai, to model ke liye seedha useful nahi — lekin usse "age" nikal kar naya column banana zyada useful hota hai.</p>
+
+  <h3>Binning</h3>
+  <p>Continuous numbers (jaise age: 23, 45, 67) ko groups/categories mein tabdeel karna — jaise "Young", "Middle-aged", "Senior". Isse kabhi kabhi patterns clearer ho jate hain.</p>
+
+  <h3>Feature Selection</h3>
+  <p>Kabhi data mein bohot saare columns hote hain, lekin sab useful nahi hote. Feature Selection ka matlab hai sirf wo columns rakhna jo prediction ke liye zaroori hain — isse model tez aur behtar bhi hota hai.</p>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>feature_engineering.py</span></div>
+    <pre><code>df[<span class="tok-str">"age"</span>] = <span class="tok-num">2026</span> - df[<span class="tok-str">"birth_year"</span>]   <span class="tok-com"># naya feature: age</span>
+
+df[<span class="tok-str">"age_group"</span>] = pd.cut(df[<span class="tok-str">"age"</span>],
+                        bins=[<span class="tok-num">0</span>,<span class="tok-num">30</span>,<span class="tok-num">50</span>,<span class="tok-num">100</span>],
+                        labels=[<span class="tok-str">"Young"</span>,<span class="tok-str">"Middle"</span>,<span class="tok-str">"Senior"</span>])  <span class="tok-com"># binning</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Current year se "birth_year" ghata kar "age" naam ka bilkul naya, zyada useful column banaya.</li>
+      <li><span class="ln">L3-5</span> <code>pd.cut()</code> age ke numbers ko teen groups (bins) mein baant kar unko labels de raha hai — ye "binning" hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ek mashhoor baat hai: <strong>"Better features beat better algorithms"</strong> — yani ek simple algorithm bhi acha perform kar sakta hai agar features achay hon, jabke best algorithm bhi kharab features ke sath fail ho sakta hai. Isi liye Feature Engineering ko ML ka "secret sauce" kaha jata hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Feature Engineering mein hum naye useful columns banate hain, numbers ko groups mein baantte hain (binning), aur sirf zaroori columns select karte hain. Data ki is "tayari" ke baad ab hum asal algorithms ki taraf badhte hain.</p>
+  </div>
+</section>
+
+
+<section class="wrap chapter-section" id="regression">
+  <span class="chapter-tag"><span class="chapter-num">9</span> Category C — Supervised Learning</span>
+  <h2>Regression (Numbers Predict Karna)</h2>
+  <p>Regression un problems ke liye use hota hai jahan hume ek <strong>continuous number</strong> predict karna ho — jaise ghar ki price, kisi student ka marks, ya kal ka temperature.</p>
+
+  <h3>Linear Regression</h3>
+  <p>Ye sabse simple aur mashhoor regression algorithm hai. Ye data ke through ek "best-fit seedhi line" (<code>y = mx + b</code>) khenchne ki koshish karta hai, jahan <code>m</code> line ka slope hai aur <code>b</code> line ka intercept. Model ka kaam hai aise <code>m</code> aur <code>b</code> dhoondna jo prediction ki galti sabse kam kar dein.</p>
+
+  <h3>Cost Function (Error Napna)</h3>
+  <p>Model ko pata chalna chahiye ke uski prediction kitni "ghalat" hai. Isay Mean Squared Error (MSE) se napa jata hai — asal value aur prediction ke farak ko square kar ke average nikalna. Jitna kam MSE, utna acha model.</p>
+
+  <h3>Gradient Descent</h3>
+  <p>Ye ek optimization technique hai jo Chapter 4 wale "derivative" concept ko use karke, chhote chhote qadam lete hue, line ke <code>m</code> aur <code>b</code> ko is tarah adjust karta hai ke MSE kam se kam hoti jaye — bilkul jaise koi pahaar se neeche utarte waqt sabse tez neeche jaane wala rasta dhoondta hai.</p>
+
+  <h3>Polynomial Regression</h3>
+  <p>Jab data ek seedhi line mein fit nahi hota (curve jaisa hota hai), to hum line ki jagah ek curve (jaise <code>y = ax² + bx + c</code>) fit karte hain — isay Polynomial Regression kehte hain.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="170" x2="470" y2="170" stroke="#7d87a0"/>
+      <line x1="40" y1="20" x2="40" y2="170" stroke="#7d87a0"/>
+      <circle cx="80" cy="140" r="4" fill="#00fff2"/><circle cx="120" cy="130" r="4" fill="#00fff2"/>
+      <circle cx="160" cy="110" r="4" fill="#00fff2"/><circle cx="210" cy="100" r="4" fill="#00fff2"/>
+      <circle cx="260" cy="80" r="4" fill="#00fff2"/><circle cx="310" cy="70" r="4" fill="#00fff2"/>
+      <circle cx="360" cy="55" r="4" fill="#00fff2"/><circle cx="410" cy="40" r="4" fill="#00fff2"/>
+      <line x1="60" y1="150" x2="440" y2="35" stroke="#ff00e5" stroke-width="2.5"/>
+      <text x="250" y="190" text-anchor="middle" fill="#a9b4c9" font-size="11">House Size →</text>
+      <text x="255" y="30" text-anchor="middle" fill="#ff00e5" font-size="11">Best-Fit Line</text>
+    </svg>
+    <p class="diagram-caption">Linear Regression: data points ke beech se guzarti "best-fit" line</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>linear_regression.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.linear_model <span class="tok-kw">import</span> LinearRegression
+<span class="tok-kw">from</span> sklearn.model_selection <span class="tok-kw">import</span> train_test_split
+
+X = df[[<span class="tok-str">"size"</span>]]          <span class="tok-com"># input feature(s)</span>
+y = df[<span class="tok-str">"price"</span>]             <span class="tok-com"># jo predict karna hai</span>
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="tok-num">0.2</span>)
+
+model = LinearRegression()
+model.fit(X_train, y_train)         <span class="tok-com"># model ko train karo</span>
+predictions = model.predict(X_test) <span class="tok-com"># naye data par predict karo</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> <code>X</code> mein wo column(s) rakhe jo prediction ke liye use honge (input/features).</li>
+      <li><span class="ln">L5</span> <code>y</code> mein wo column rakha jo hum predict karna chahte hain (target).</li>
+      <li><span class="ln">L7</span> Data ko 80% training aur 20% testing mein baanta — taake model ko unseen data par test kiya ja sake.</li>
+      <li><span class="ln">L9-10</span> Model banaya aur <code>.fit()</code> se usay training data se "seekhaya".</li>
+      <li><span class="ln">L11</span> <code>.predict()</code> se test data par naye numbers predict karwaye.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Regression ML ka sabse bunyaadi building block hai — isi se cost function, gradient descent aur train/test split jaise concepts seekhte hain jo aage har algorithm (yahan tak ke Deep Learning) mein dobara istemal honge.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Regression continuous numbers predict karta hai. Linear Regression ek best-fit line dhoondta hai, error ko MSE se naapa jata hai, aur Gradient Descent us error ko kam karta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="classification">
+  <span class="chapter-tag"><span class="chapter-num">10</span> Category C — Supervised Learning</span>
+  <h2>Classification (Categories Predict Karna)</h2>
+  <p>Classification tab use hoti hai jab hume ek <strong>category/label</strong> predict karni ho — jaise "Spam ya Not Spam", "Bimar ya Sehatmand", ya "Cat, Dog, ya Bird".</p>
+
+  <table>
+    <tr><th>Algorithm</th><th>Kaam Kaise Karta Hai</th></tr>
+    <tr><td>Logistic Regression</td><td>Probability nikalta hai (0-1 ke beech) aur usay ek threshold (jaise 0.5) se category mein badalta hai.</td></tr>
+    <tr><td>K-Nearest Neighbors (KNN)</td><td>Naye point ke "sabse qareeb K" purane points dekh kar, unki majority category assign karta hai.</td></tr>
+    <tr><td>Decision Tree</td><td>Data ko baar baar sawalon (jaise "size &gt; 1000?") se chhote hisson mein baant kar decision leta hai.</td></tr>
+    <tr><td>Random Forest</td><td>Bohot saare Decision Trees ka "majma" (ensemble) banata hai aur unki majority vote leta hai — zyada mazboot result.</td></tr>
+    <tr><td>Support Vector Machine (SVM)</td><td>Do categories ke darmiyan sabse "chaudi" boundary (margin) dhoondta hai taake alag karna asan ho.</td></tr>
+    <tr><td>Naive Bayes</td><td>Probability (Chapter 4) use karke ye calculate karta hai ke di gayi features ke sath kaunsi category zyada mumkin hai.</td></tr>
+  </table>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="20" width="440" height="160" rx="10" fill="rgba(255,255,255,0.02)" stroke="#333"/>
+      <path d="M30,150 C150,120 300,60 470,40" stroke="#39ff88" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+      <circle cx="80" cy="160" r="5" fill="#00fff2"/><circle cx="120" cy="140" r="5" fill="#00fff2"/>
+      <circle cx="160" cy="150" r="5" fill="#00fff2"/><circle cx="100" cy="100" r="5" fill="#00fff2"/>
+      <circle cx="200" cy="70" r="5" fill="#ff00e5"/><circle cx="260" cy="50" r="5" fill="#ff00e5"/>
+      <circle cx="330" cy="40" r="5" fill="#ff00e5"/><circle cx="400" cy="30" r="5" fill="#ff00e5"/>
+      <text x="90" y="185" fill="#00fff2" font-size="11">● Category A</text>
+      <text x="380" y="185" fill="#ff00e5" font-size="11">● Category B</text>
+      <text x="330" y="35" fill="#39ff88" font-size="10">Decision Boundary</text>
+    </svg>
+    <p class="diagram-caption">Classification: model ek "boundary" seekhta hai jo do categories ko alag karti hai</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>classification.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.tree <span class="tok-kw">import</span> DecisionTreeClassifier
+
+model = DecisionTreeClassifier(max_depth=<span class="tok-num">4</span>)  <span class="tok-com"># tree kitni gehri ho sakti hai</span>
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+accuracy = model.score(X_test, y_test)  <span class="tok-com"># kitna % sahi predict hua</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> Decision Tree banaya, <code>max_depth=4</code> se batya ke tree zyada se zyada 4 level gehri jaa sakti hai (zyada gehri tree overfit ho sakti hai — Chapter 12).</li>
+      <li><span class="ln">L4</span> Model ko training data ke sawal-jawab se train kiya.</li>
+      <li><span class="ln">L5</span> Test data par category predict karwayi.</li>
+      <li><span class="ln">L6</span> <code>.score()</code> batata hai model ne kitne percent sahi predictions ki.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Zyada tar real-world business problems (fraud detection, disease diagnosis, customer churn) Classification problems hote hain. Alag algorithms alag situations mein behtar kaam karte hain, isi liye kai algorithms ka basic pata hona zaroori hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Classification categories predict karta hai. Har algorithm (Logistic Regression, KNN, Decision Tree, Random Forest, SVM, Naive Bayes) ka apna tareeqa hai boundary/decision banane ka.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="evaluation-metrics">
+  <span class="chapter-tag"><span class="chapter-num">11</span> Category C — Supervised Learning</span>
+  <h2>Model Evaluation Metrics</h2>
+  <p>Model banane ke baad sabse zaroori sawal ye hai: <strong>"Model kitna acha hai?"</strong> Iska jawab dene ke liye alag alag metrics use hoti hain — Regression aur Classification ke liye alag.</p>
+
+  <h3>Classification Metrics</h3>
+  <div class="diagram-box">
+    <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="60" y="30" width="140" height="90" fill="rgba(57,255,136,0.15)" stroke="#39ff88"/>
+      <rect x="200" y="30" width="140" height="90" fill="rgba(255,0,229,0.12)" stroke="#ff00e5"/>
+      <rect x="60" y="120" width="140" height="90" fill="rgba(255,0,229,0.12)" stroke="#ff00e5"/>
+      <rect x="200" y="120" width="140" height="90" fill="rgba(57,255,136,0.15)" stroke="#39ff88"/>
+      <text x="130" y="80" text-anchor="middle" fill="#39ff88" font-size="13">True Positive</text>
+      <text x="270" y="80" text-anchor="middle" fill="#ff00e5" font-size="13">False Positive</text>
+      <text x="130" y="170" text-anchor="middle" fill="#ff00e5" font-size="13">False Negative</text>
+      <text x="270" y="170" text-anchor="middle" fill="#39ff88" font-size="13">True Negative</text>
+      <text x="130" y="20" text-anchor="middle" fill="#a9b4c9" font-size="11">Predicted: Yes</text>
+      <text x="270" y="20" text-anchor="middle" fill="#a9b4c9" font-size="11">Predicted: No</text>
+    </svg>
+    <p class="diagram-caption">Confusion Matrix — asal (actual) vs predicted values ka table</p>
+  </div>
+
+  <table>
+    <tr><th>Metric</th><th>Formula / Matlab</th><th>Kab Use Karein</th></tr>
+    <tr><td>Accuracy</td><td>Sahi predictions ÷ Total predictions</td><td>Jab dono categories barabar mात्रा mein hon</td></tr>
+    <tr><td>Precision</td><td>True Positive ÷ (True Positive + False Positive)</td><td>Jab False Positive mehnga ho (jaise spam na wali email spam mein daalna)</td></tr>
+    <tr><td>Recall</td><td>True Positive ÷ (True Positive + False Negative)</td><td>Jab False Negative khatarnak ho (jaise bimari miss karna)</td></tr>
+    <tr><td>F1-Score</td><td>Precision aur Recall ka balance (harmonic mean)</td><td>Jab dono important hon</td></tr>
+    <tr><td>ROC-AUC</td><td>Model ka classes alag karne ka overall ability score</td><td>Model comparison ke liye</td></tr>
+  </table>
+
+  <h3>Regression Metrics</h3>
+  <table>
+    <tr><th>Metric</th><th>Matlab</th></tr>
+    <tr><td>MSE (Mean Squared Error)</td><td>Error ko square kar ke average — bade errors ko zyada saza deta hai</td></tr>
+    <tr><td>RMSE</td><td>MSE ka square root — asli units mein error batata hai</td></tr>
+    <tr><td>R² Score</td><td>Model data ki kitni "variation" explain kar pa raha hai (1 = perfect, 0 = bekaar)</td></tr>
+  </table>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>evaluation.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.metrics <span class="tok-kw">import</span> accuracy_score, precision_score, recall_score, f1_score
+
+<span class="tok-fn">print</span>(<span class="tok-str">"Accuracy:"</span>, accuracy_score(y_test, predictions))
+<span class="tok-fn">print</span>(<span class="tok-str">"Precision:"</span>, precision_score(y_test, predictions))
+<span class="tok-fn">print</span>(<span class="tok-str">"Recall:"</span>, recall_score(y_test, predictions))
+<span class="tok-fn">print</span>(<span class="tok-str">"F1 Score:"</span>, f1_score(y_test, predictions))</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> Actual (<code>y_test</code>) aur predicted values compare karke overall accuracy nikali.</li>
+      <li><span class="ln">L4-5</span> Precision aur Recall alag alag calculate kiye — dono galtiyon (False Positive/Negative) ko alag alag napte hain.</li>
+      <li><span class="ln">L6</span> F1 Score precision aur recall dono ka balance dikhata hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Sirf "Accuracy" dekh kar model achi nahi lagti — misaal ke tor par agar 95% log bimar nahi hain, to model hamesha "sehatmand" bol kar bhi 95% accuracy le sakta hai, jabke ye bilkul bekaar model hai. Sahi metric choose karna is liye critical hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Classification ke liye Accuracy, Precision, Recall, F1, ROC-AUC; Regression ke liye MSE, RMSE, R². Sahi metric problem ki nature par depend karta hai, sirf accuracy kaafi nahi.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="overfitting-regularization">
+  <span class="chapter-tag"><span class="chapter-num">12</span> Category C — Supervised Learning</span>
+  <h2>Overfitting, Underfitting &amp; Regularization</h2>
+  <p>Model banate waqt sabse bada khatra ye hota hai ke model ya to "bohot kam" seekhe ya "zaroorat se zyada" seekh le. In dono cheezon ko samajhna model ki quality ke liye sabse zaroori concept hai.</p>
+
+  <h3>Underfitting</h3>
+  <p>Jab model itna simple ho ke wo data ka pattern theek se seekh hi na paye — training data par bhi kharab performance deta hai. Isay "High Bias" bhi kehte hain.</p>
+
+  <h3>Overfitting</h3>
+  <p>Jab model training data ko itni "rat" leta hai (yahan tak ke uska noise/ghalti bhi) ke naye (test) data par kharab perform karta hai. Training par accuracy 99% lekin test par 60% — ye classic overfitting hai. Isay "High Variance" bhi kehte hain.</p>
+
+  <h3>Bias-Variance Tradeoff</h3>
+  <p>Bias aur Variance ke darmiyan sahi balance dhoondna hi ek acha model banane ka raaz hai — na zyada simple (underfit), na zyada complex (overfit).</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="12" text-anchor="middle">
+        <line x1="20" y1="160" x2="180" y2="160" stroke="#7d87a0"/><line x1="20" y1="20" x2="20" y2="160" stroke="#7d87a0"/>
+        <line x1="30" y1="140" x2="170" y2="120" stroke="#ff00e5" stroke-width="2.5"/>
+        <text x="100" y="185" fill="#ff00e5">Underfitting</text>
+        <circle cx="45" cy="130" r="3" fill="#00fff2"/><circle cx="90" cy="95" r="3" fill="#00fff2"/><circle cx="130" cy="110" r="3" fill="#00fff2"/><circle cx="160" cy="80" r="3" fill="#00fff2"/>
+
+        <line x1="230" y1="160" x2="390" y2="160" stroke="#7d87a0"/><line x1="230" y1="20" x2="230" y2="160" stroke="#7d87a0"/>
+        <path d="M240,140 Q300,60 380,90" stroke="#39ff88" stroke-width="2.5" fill="none"/>
+        <text x="310" y="185" fill="#39ff88">Just Right ✓</text>
+        <circle cx="255" cy="130" r="3" fill="#00fff2"/><circle cx="300" cy="95" r="3" fill="#00fff2"/><circle cx="340" cy="105" r="3" fill="#00fff2"/><circle cx="370" cy="85" r="3" fill="#00fff2"/>
+
+        <line x1="440" y1="160" x2="600" y2="160" stroke="#7d87a0"/><line x1="440" y1="20" x2="440" y2="160" stroke="#7d87a0"/>
+        <path d="M450,140 Q470,90 490,130 Q510,60 530,110 Q550,70 590,90" stroke="#ff7edb" stroke-width="2.5" fill="none"/>
+        <text x="520" y="185" fill="#ff7edb">Overfitting</text>
+        <circle cx="465" cy="130" r="3" fill="#00fff2"/><circle cx="495" cy="95" r="3" fill="#00fff2"/><circle cx="535" cy="105" r="3" fill="#00fff2"/><circle cx="570" cy="85" r="3" fill="#00fff2"/>
+      </g>
+    </svg>
+    <p class="diagram-caption">Underfitting (bohot simple), Just Right (behtareen balance), Overfitting (bohot complex/noise fit)</p>
+  </div>
+
+  <h3>Regularization (L1 &amp; L2)</h3>
+  <p>Regularization ek tareeqa hai jo model ko "zaroorat se zyada complex" hone se roakta hai — model ke sath ek chhoti si "saza (penalty)" jorh di jati hai agar wo bohot pechida ho jaye. <strong>L1 (Lasso)</strong> kam ahmiyat rakhne wale features ka wazan bilkul 0 kar deta hai (feature selection jaisa asar), jabke <strong>L2 (Ridge)</strong> sab features ke wazan ko chhota kar deta hai bina unhe zero kiye.</p>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>regularization.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.linear_model <span class="tok-kw">import</span> Ridge, Lasso
+
+ridge_model = Ridge(alpha=<span class="tok-num">1.0</span>)   <span class="tok-com"># L2 regularization</span>
+ridge_model.fit(X_train, y_train)
+
+lasso_model = Lasso(alpha=<span class="tok-num">0.1</span>)   <span class="tok-com"># L1 regularization</span>
+lasso_model.fit(X_train, y_train)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> <code>alpha</code> batata hai penalty kitni strong ho — zyada alpha, zyada simple model.</li>
+      <li><span class="ln">L6</span> Lasso wahi kaam karta hai lekin kam ahmiyat wale features ka wazan bilkul zero kar sakta hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ek model jo sirf training data par acha lage lekin real duniya (naye data) par fail ho jaye, woh bekaar hai. Overfitting/Underfitting pehchanna aur Regularization se theek karna, ek "production-ready" model banane ke liye sabse zaroori skill hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Underfitting = bohot simple, Overfitting = bohot complex. Regularization (L1/L2) model ko zaroorat se zyada complex hone se rok kar behtar balance banata hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="cross-validation-tuning">
+  <span class="chapter-tag"><span class="chapter-num">13</span> Category C — Supervised Learning</span>
+  <h2>Cross-Validation &amp; Hyperparameter Tuning</h2>
+  <p>Ek hi train/test split par model ko evaluate karna kabhi kabhi "luck" par depend kar sakta hai. Cross-Validation aur Hyperparameter Tuning is masle ko systematically hal karte hain.</p>
+
+  <h3>K-Fold Cross-Validation</h3>
+  <p>Data ko K (jaise 5) barabar hisson mein baant kar, har baar ek hissa test ke liye aur baaqi training ke liye use kiya jata hai — ye process K baar repeat hota hai. Aakhir mein sab K results ka average liya jata hai, jo model ki performance ka zyada bharosemand (reliable) andaza deta hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Poppins" font-size="10.5" fill="#eaf6ff">
+        <rect x="20" y="20" width="460" height="24" fill="none" stroke="#333"/>
+        <rect x="20" y="20" width="90" height="24" fill="rgba(255,0,229,0.25)" stroke="#ff00e5"/>
+        <text x="250" y="60" fill="#a9b4c9">Fold 1: Test = pehla hissa, baaqi Training</text>
+
+        <rect x="20" y="75" width="460" height="24" fill="none" stroke="#333"/>
+        <rect x="110" y="75" width="90" height="24" fill="rgba(255,0,229,0.25)" stroke="#ff00e5"/>
+        <text x="250" y="115" fill="#a9b4c9">Fold 2: Test = dusra hissa, baaqi Training</text>
+      </g>
+    </svg>
+    <p class="diagram-caption">K-Fold Cross-Validation: har round mein test hissa badalta rehta hai</p>
+  </div>
+
+  <h3>Hyperparameter Tuning</h3>
+  <p>Har algorithm ki apni "settings" hoti hain (jaise Decision Tree ka <code>max_depth</code>, KNN ka <code>k</code>) jinhe <strong>Hyperparameters</strong> kehte hain. Ye settings data se seekhi nahi jatin — hume khud best value dhoondni parti hai. <strong>Grid Search</strong> tamam mumkin combinations try karta hai, jabke <strong>Random Search</strong> random combinations try karta hai (tez lekin thora kam thorough).</p>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>tuning.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.model_selection <span class="tok-kw">import</span> GridSearchCV
+<span class="tok-kw">from</span> sklearn.tree <span class="tok-kw">import</span> DecisionTreeClassifier
+
+params = {<span class="tok-str">"max_depth"</span>: [<span class="tok-num">2</span>,<span class="tok-num">4</span>,<span class="tok-num">6</span>,<span class="tok-num">8</span>]}  <span class="tok-com"># try karne wali values</span>
+
+grid = GridSearchCV(DecisionTreeClassifier(), params, cv=<span class="tok-num">5</span>)  <span class="tok-com"># cv=5 -> 5-fold CV</span>
+grid.fit(X_train, y_train)
+
+<span class="tok-fn">print</span>(<span class="tok-str">"Best Setting:"</span>, grid.best_params_)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> Un values ki list banayi jo hum <code>max_depth</code> ke liye try karna chahte hain.</li>
+      <li><span class="ln">L6</span> <code>GridSearchCV</code> har value ko 5-fold cross-validation ke sath try karega.</li>
+      <li><span class="ln">L7</span> Ye pura search process chalata hai.</li>
+      <li><span class="ln">L9</span> Jo combination sabse behtar result deta hai wo print hota hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ek hi random train/test split model ki asal performance ko ghalat tareeqe se dikha sakta hai (kabhi acha, kabhi bura). Cross-Validation zyada bharosemand result deta hai, aur Hyperparameter Tuning se model ki best possible settings automatically mil jati hain — manually guess karne ki zaroorat nahi.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Cross-Validation model ko multiple splits par test kar ke reliable evaluation deta hai. Hyperparameter Tuning (Grid/Random Search) best settings dhoondta hai. Yahan tak "Category C — Supervised Learning" complete hui — ab hum Unsupervised Learning ki taraf badhte hain.</p>
+  </div>
+</section>
+
+
+<section class="wrap chapter-section" id="clustering">
+  <span class="chapter-tag"><span class="chapter-num">14</span> Category D — Unsupervised Learning</span>
+  <h2>Clustering</h2>
+  <p>Clustering ka matlab hai data ko unki similarity (mushabihat) ke bunyad par khud-b-khud groups (clusters) mein baant dena — bina pehle se bataye ke groups kya honge ya kitne honge.</p>
+
+  <h3>K-Means Clustering</h3>
+  <p>Sabse mashhoor clustering algorithm. Hum pehle bata dete hain ke kitne clusters (K) chahiye, phir algorithm data points ko unke "sabse qareeb center (centroid)" ke hisaab se groups mein baant deta hai, aur centers ko baar baar behtar karta rehta hai jab tak groups stable na ho jayein.</p>
+
+  <h3>Hierarchical Clustering</h3>
+  <p>Ye clusters ka ek "tree jaisa structure" (dendrogram) banata hai — chhote clusters ko step by step bade clusters mein merge karta jata hai. Iska faida ye hai ke humein pehle se K batane ki zaroorat nahi hoti.</p>
+
+  <h3>DBSCAN</h3>
+  <p>Ye density (ghanapan) ke bunyad par clusters banata hai — jahan points ek dusre ke qareeb-qareeb (dense) hon, wahan cluster banta hai, aur jo points akele (sparse) hon unhe "noise/outlier" declare kar deta hai. Iska faida ye hai ke ye ajeeb-shape ke clusters bhi dhoond sakta hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="120" cy="70" r="8" fill="rgba(0,255,242,0.5)"/><circle cx="140" cy="90" r="8" fill="rgba(0,255,242,0.5)"/><circle cx="100" cy="100" r="8" fill="rgba(0,255,242,0.5)"/><circle cx="130" cy="60" r="8" fill="rgba(0,255,242,0.5)"/>
+      <circle cx="350" cy="60" r="8" fill="rgba(255,0,229,0.5)"/><circle cx="370" cy="80" r="8" fill="rgba(255,0,229,0.5)"/><circle cx="330" cy="90" r="8" fill="rgba(255,0,229,0.5)"/><circle cx="360" cy="100" r="8" fill="rgba(255,0,229,0.5)"/>
+      <circle cx="230" cy="150" r="8" fill="rgba(157,78,221,0.5)"/><circle cx="255" cy="165" r="8" fill="rgba(157,78,221,0.5)"/><circle cx="210" cy="170" r="8" fill="rgba(157,78,221,0.5)"/><circle cx="245" cy="140" r="8" fill="rgba(157,78,221,0.5)"/>
+      <text x="120" y="35" text-anchor="middle" fill="#00fff2" font-size="12">Cluster A</text>
+      <text x="350" y="35" text-anchor="middle" fill="#ff00e5" font-size="12">Cluster B</text>
+      <text x="235" y="195" text-anchor="middle" fill="#9d4edd" font-size="12">Cluster C</text>
+    </svg>
+    <p class="diagram-caption">Clustering: similar data points khud-b-khud groups bana lete hain</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>kmeans.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.cluster <span class="tok-kw">import</span> KMeans
+
+model = KMeans(n_clusters=<span class="tok-num">3</span>)   <span class="tok-com"># hum 3 groups chahte hain</span>
+model.fit(X)                     <span class="tok-com"># koi label nahi diya, sirf data diya</span>
+clusters = model.predict(X)      <span class="tok-com"># har point ko uska cluster number milega</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> <code>n_clusters=3</code> se batya ke data ko 3 groups mein baantna hai.</li>
+      <li><span class="ln">L4</span> Notice karein — yahan koi <code>y</code> (label) nahi di gayi, sirf <code>X</code> (features) di gayi, kyunke ye Unsupervised hai.</li>
+      <li><span class="ln">L5</span> Har data point ko ek cluster number (0, 1, ya 2) assign hota hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bohot se real business problems mein humein pata nahi hota ke "sahi jawab" kya hai — jaise "customers ko kin groups mein baanta jaye" ka koi fixed jawab nahi hota. Clustering aise chupe hue patterns khud dhoond leta hai jo insaan ko nazar nahi aate.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Clustering bina labels ke data ko groups mein baantta hai. K-Means fixed number of groups banata hai, Hierarchical ek tree structure banata hai, aur DBSCAN density ke hisaab se ajeeb-shape clusters bhi dhoond leta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="dimensionality-reduction">
+  <span class="chapter-tag"><span class="chapter-num">15</span> Category D — Unsupervised Learning</span>
+  <h2>Dimensionality Reduction</h2>
+  <p>Kabhi kabhi data mein bohot saare columns (dimensions) hote hain — jaise 100 features. Itne saare dimensions ko handle karna mushkil aur slow hota hai. Dimensionality Reduction in bohot se columns ko kam (jaise 2-3) "naye" columns mein tabdeel kar deta hai, jabke asal information zyada se zyada bacha kar rakhta hai.</p>
+
+  <h3>PCA (Principal Component Analysis)</h3>
+  <p>PCA data ke sabse "important directions" (jinhe Principal Components kehte hain) dhoondta hai jahan data mein sabse zyada variation (farak) maujood hai, aur data ko sirf inhi directions par project kar deta hai — is tarah kam dimensions mein bhi zyada se zyada information bach jati hai.</p>
+
+  <h3>t-SNE</h3>
+  <p>Ye ek aur technique hai jo khaas taur par high-dimensional data ko 2D/3D mein "visualize" karne ke liye use hoti hai — taake hum apni aankhon se dekh sakein ke data mein kaise groups/patterns maujood hain.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="12" fill="#eaf6ff" text-anchor="middle">
+        <rect x="30" y="30" width="150" height="110" rx="12" fill="rgba(255,0,229,0.08)" stroke="#ff00e5"/>
+        <text x="105" y="20" fill="#ff00e5">100 Columns</text>
+        <text x="105" y="90" font-size="24">▦▦▦</text>
+        <rect x="320" y="55" width="150" height="60" rx="12" fill="rgba(0,255,242,0.08)" stroke="#00fff2"/>
+        <text x="395" y="45" fill="#00fff2">2-3 Columns</text>
+        <text x="395" y="90" font-size="20">▦▦</text>
+      </g>
+      <line x1="185" y1="85" x2="315" y2="85" stroke="#7d87a0" stroke-width="2" marker-end="url(#arrow3)"/>
+      <text x="250" y="75" fill="#a9b4c9" font-size="11">PCA</text>
+      <defs><marker id="arrow3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">Dimensionality Reduction: bohot saare columns ko kam, useful columns mein badalna</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>pca.py</span></div>
+    <pre><code><span class="tok-kw">from</span> sklearn.decomposition <span class="tok-kw">import</span> PCA
+
+pca = PCA(n_components=<span class="tok-num">2</span>)          <span class="tok-com"># 100 columns ko 2 mein simat dena hai</span>
+X_reduced = pca.fit_transform(X)   <span class="tok-com"># naya, chhota dataset</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> <code>n_components=2</code> batata hai ke asal data ko sirf 2 naye "super-columns" mein compress karna hai.</li>
+      <li><span class="ln">L4</span> Naya, chhota dataset milta hai jo plot karna ya model mein use karna dono asan ho jata hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bohot zyada columns (jise "Curse of Dimensionality" kehte hain) model ko slow aur kabhi kabhi kam accurate bana deti hain. Dimensionality Reduction se model tez chalta hai, storage kam lagti hai, aur data ko visualize karna bhi mumkin ho jata hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Dimensionality Reduction bohot saare columns ko kam, informative columns mein badalta hai. PCA sabse mashhoor technique hai, jabke t-SNE visualization ke liye behtar hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="association-rules">
+  <span class="chapter-tag"><span class="chapter-num">16</span> Category D — Unsupervised Learning</span>
+  <h2>Association Rule Learning</h2>
+  <p>Ye technique data mein aise patterns dhoondti hai jo batate hain ke "kaunsi cheezein aksar sath mein hoti hain". Isay "Market Basket Analysis" bhi kehte hain.</p>
+
+  <h3>Apriori Algorithm</h3>
+  <p>Ye algorithm shopping data mein ye dhoondta hai ke agar koi customer ek cheez (jaise "bread") khareedta hai, to wo kaunsi doosri cheez (jaise "butter") bhi khareedne ka imkaan rakhta hai. Isay rules ki shakal mein likha jata hai: <code>{Bread} → {Butter}</code>.</p>
+
+  <div class="example-box">
+    <span class="label">💡 Real-Life Example</span>
+    <p>Amazon ya kisi bhi online store par jab aap ek mobile phone khareedte hain aur website "Customers who bought this also bought a phone cover" dikhati hai — ye Association Rule Learning ka common use hai.</p>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Retail aur e-commerce business mein products ko sahi jagah rakhna, combo-offers banana, aur recommendations dena — in sab ka bunyaad Association Rules par hota hai. Ye Unsupervised Learning ki teesri important application hai (Clustering aur Dimensionality Reduction ke baad).</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Association Rules batate hain kaunsi items sath mein aksar khareedi/use hoti hain. Yahan Category D complete hui — ab hum Deep Learning aur Advanced ML ki taraf badhte hain.</p>
+  </div>
+</section>
+
+
+<section class="wrap chapter-section" id="neural-networks">
+  <span class="chapter-tag"><span class="chapter-num">17</span> Category E — Advanced / Deep Learning</span>
+  <h2>Neural Networks (Bunyaadi Baatein)</h2>
+  <p>Neural Network ek aisa model hai jo insaan ke dimagh ke neurons se inspire ho kar banaya gaya hai. Ye "Deep Learning" ki bunyaad hai aur bohot complex patterns (jaise images, awaaz, zaban) seekh sakta hai.</p>
+
+  <h3>Structure: Layers, Weights, Bias</h3>
+  <p>Neural Network teen tarah ki layers par mushtamil hota hai: <strong>Input Layer</strong> (data andar aata hai), <strong>Hidden Layers</strong> (beech mein calculations hoti hain), aur <strong>Output Layer</strong> (final prediction). Har connection ka apna "weight" (ahmiyat) hota hai jo training ke doran adjust hota hai, aur har neuron mein ek "bias" bhi hota hai.</p>
+
+  <h3>Activation Functions</h3>
+  <p>Har neuron apne input ko ek "activation function" se guzarta hai taake network non-linear (pechida) patterns bhi seekh sake. Mashhoor activation functions: <strong>ReLU</strong> (negative ko 0 kar deta hai, hidden layers mein aam), <strong>Sigmoid</strong> (0-1 ke beech probability deta hai, binary classification mein), aur <strong>Softmax</strong> (multiple categories ki probability deta hai).</p>
+
+  <h3>Forward &amp; Backward Propagation</h3>
+  <p><strong>Forward Propagation</strong> mein data input se output tak calculations se guzarta hai aur ek prediction deta hai. Phir prediction ki "galti" (error) nikali jati hai, aur <strong>Backpropagation</strong> mein ye error wapas layers mein bheja jata hai taake har weight ko thora sa adjust kiya ja sake (Gradient Descent, Chapter 9 wala concept) — ye process hazaron baar repeat hota hai jab tak model acha na ho jaye.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#00fff2">
+        <circle cx="60" cy="60" r="12"/><circle cx="60" cy="110" r="12"/><circle cx="60" cy="160" r="12"/>
+      </g>
+      <g fill="#ff00e5">
+        <circle cx="230" cy="40" r="12"/><circle cx="230" cy="90" r="12"/><circle cx="230" cy="140" r="12"/><circle cx="230" cy="190" r="12"/>
+      </g>
+      <g fill="#9d4edd">
+        <circle cx="400" cy="90" r="12"/><circle cx="400" cy="140" r="12"/>
+      </g>
+      <g stroke="rgba(255,255,255,0.15)">
+        <line x1="72" y1="60" x2="218" y2="40"/><line x1="72" y1="60" x2="218" y2="90"/><line x1="72" y1="60" x2="218" y2="140"/><line x1="72" y1="60" x2="218" y2="190"/>
+        <line x1="72" y1="110" x2="218" y2="40"/><line x1="72" y1="110" x2="218" y2="90"/><line x1="72" y1="110" x2="218" y2="140"/><line x1="72" y1="110" x2="218" y2="190"/>
+        <line x1="72" y1="160" x2="218" y2="40"/><line x1="72" y1="160" x2="218" y2="90"/><line x1="72" y1="160" x2="218" y2="140"/><line x1="72" y1="160" x2="218" y2="190"/>
+        <line x1="242" y1="40" x2="388" y2="90"/><line x1="242" y1="90" x2="388" y2="90"/><line x1="242" y1="140" x2="388" y2="90"/><line x1="242" y1="190" x2="388" y2="90"/>
+        <line x1="242" y1="40" x2="388" y2="140"/><line x1="242" y1="90" x2="388" y2="140"/><line x1="242" y1="140" x2="388" y2="140"/><line x1="242" y1="190" x2="388" y2="140"/>
+      </g>
+      <text x="60" y="205" text-anchor="middle" fill="#00fff2" font-size="11">Input</text>
+      <text x="230" y="215" text-anchor="middle" fill="#ff00e5" font-size="11">Hidden Layer</text>
+      <text x="400" y="165" text-anchor="middle" fill="#9d4edd" font-size="11">Output</text>
+    </svg>
+    <p class="diagram-caption">Ek simple Neural Network — Input → Hidden Layer(s) → Output</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>simple_nn.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.models <span class="tok-kw">import</span> Sequential
+<span class="tok-kw">from</span> tensorflow.keras.layers <span class="tok-kw">import</span> Dense
+
+model = Sequential([
+    Dense(<span class="tok-num">16</span>, activation=<span class="tok-str">"relu"</span>, input_shape=(<span class="tok-num">4</span>,)),  <span class="tok-com"># hidden layer</span>
+    Dense(<span class="tok-num">1</span>, activation=<span class="tok-str">"sigmoid"</span>)                  <span class="tok-com"># output layer</span>
+])</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> <code>Sequential</code> se layers ko ek ke baad ek jorh kar network banaya.</li>
+      <li><span class="ln">L5</span> Pehli hidden layer mein 16 neurons hain, ReLU activation use ho rahi hai, aur input mein 4 features aa rahe hain.</li>
+      <li><span class="ln">L6</span> Output layer mein 1 neuron hai (binary classification), Sigmoid se 0-1 probability milegi.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Neural Networks har Deep Learning technology (image recognition, ChatGPT jaise language models, self-driving cars) ki bunyaad hain. Inki basic structure samajhna aage ke tamam advanced chapters (CNN, RNN, Transformers) ko samajhne ke liye zaroori hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Neural Network = Input → Hidden Layers (weights + activation) → Output. Forward Propagation prediction deta hai, Backpropagation error ke zariye weights ko behtar karta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="dl-frameworks">
+  <span class="chapter-tag"><span class="chapter-num">18</span> Category E — Advanced / Deep Learning</span>
+  <h2>Deep Learning Frameworks</h2>
+  <p>Neural Networks ko zero se code karna mushkil hoga, isi liye "frameworks" (ready-made tools) use kiye jate hain jo ye kaam bohot asan bana dete hain.</p>
+
+  <table>
+    <tr><th>Framework</th><th>Kis Ne Banaya</th><th>Khaasiyat</th></tr>
+    <tr><td>TensorFlow</td><td>Google</td><td>Production/deployment ke liye mazboot, industry mein popular</td></tr>
+    <tr><td>Keras</td><td>TensorFlow ke andar</td><td>Bohot simple, beginner-friendly API</td></tr>
+    <tr><td>PyTorch</td><td>Meta</td><td>Flexible, research aur experiments ke liye favourite</td></tr>
+  </table>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>compile_train.py</span></div>
+    <pre><code>model.<span class="tok-fn">compile</span>(optimizer=<span class="tok-str">"adam"</span>, loss=<span class="tok-str">"binary_crossentropy"</span>, metrics=[<span class="tok-str">"accuracy"</span>])
+model.fit(X_train, y_train, epochs=<span class="tok-num">20</span>, batch_size=<span class="tok-num">32</span>)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> <code>compile()</code> batata hai model kaise seekhega: <code>optimizer="adam"</code> weights update karne ka tareeqa hai, <code>loss</code> error naapne ka formula hai.</li>
+      <li><span class="ln">L2</span> <code>epochs=20</code> ka matlab hai poora dataset 20 baar dikhaya jayega, aur <code>batch_size=32</code> matlab har baar 32 examples ka chhota group dekh kar weights update honge.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bina in frameworks ke, ek chhota sa Neural Network banane ke liye bhi sainkron lines ka gradient descent code khud likhna parta. Frameworks ye sab "andar hi andar" handle kar lete hain, taake hum sirf model ki design par focus kar sakein.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>TensorFlow/Keras aur PyTorch dono Deep Learning ke liye use hote hain — Keras beginners ke liye asan hai, PyTorch research mein zyada flexible hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="cnn">
+  <span class="chapter-tag"><span class="chapter-num">19</span> Category E — Advanced / Deep Learning</span>
+  <h2>CNN — Convolutional Neural Networks (Images Ke Liye)</h2>
+  <p>CNN khaas taur par <strong>images</strong> ke liye design ki gayi hai. Ye tasveer mein features (jaise edges, shapes, textures) khud pehchan leta hai, bina insaan ko manually batane ke.</p>
+
+  <h3>Convolution Layer (Filters)</h3>
+  <p>Ek chhota "filter/kernel" (jaise 3x3 grid) tasveer par ghumaya jata hai aur har jagah ek calculation karta hai — ye edges, colors ya patterns dhoondne mein madad karta hai. Alag alag filters alag features (jaise horizontal lines, curves) pakadte hain.</p>
+
+  <h3>Pooling Layer</h3>
+  <p>Pooling tasveer ke size ko chhota kar deta hai (jaise sabse zaroori information rakh kar), jisse computation tez ho jati hai aur model chhote farq (jaise object ka thora idhar-udhar hona) ignore kar leta hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="11" text-anchor="middle" fill="#eaf6ff">
+        <rect x="20" y="20" width="90" height="90" fill="rgba(0,255,242,0.08)" stroke="#00fff2"/>
+        <text x="65" y="15">Image</text>
+        <rect x="150" y="35" width="70" height="60" fill="rgba(255,0,229,0.1)" stroke="#ff00e5"/>
+        <text x="185" y="30">Conv Filter</text>
+        <rect x="270" y="45" width="55" height="40" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/>
+        <text x="297" y="40">Pooling</text>
+        <rect x="380" y="55" width="90" height="20" fill="rgba(57,255,136,0.12)" stroke="#39ff88"/>
+        <text x="425" y="50">Output Class</text>
+      </g>
+      <line x1="112" y1="65" x2="148" y2="65" stroke="#7d87a0" marker-end="url(#arrow4)"/>
+      <line x1="222" y1="65" x2="268" y2="65" stroke="#7d87a0" marker-end="url(#arrow4)"/>
+      <line x1="327" y1="65" x2="378" y2="65" stroke="#7d87a0" marker-end="url(#arrow4)"/>
+      <defs><marker id="arrow4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">CNN Pipeline: Image → Convolution (feature dhoondna) → Pooling (size kam karna) → Final Prediction</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>cnn.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.layers <span class="tok-kw">import</span> Conv2D, MaxPooling2D, Flatten, Dense
+
+model = Sequential([
+    Conv2D(<span class="tok-num">32</span>, (<span class="tok-num">3</span>,<span class="tok-num">3</span>), activation=<span class="tok-str">"relu"</span>, input_shape=(<span class="tok-num">64</span>,<span class="tok-num">64</span>,<span class="tok-num">3</span>)),  <span class="tok-com"># 32 filters</span>
+    MaxPooling2D(<span class="tok-num">2</span>,<span class="tok-num">2</span>),                                                <span class="tok-com"># image size adhi karo</span>
+    Flatten(),                                                        <span class="tok-com"># 2D ko 1D mein badlo</span>
+    Dense(<span class="tok-num">10</span>, activation=<span class="tok-str">"softmax"</span>)                                     <span class="tok-com"># 10 categories</span>
+])</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> 32 alag alag 3x3 filters image par apply honge, taake 32 alag features pakre ja sakein. Input image 64x64 pixels aur 3 colors (RGB) ki hai.</li>
+      <li><span class="ln">L5</span> Pooling image ka size 2x2 blocks mein compress karti hai — computation fast hoti hai.</li>
+      <li><span class="ln">L6</span> <code>Flatten()</code> 2D image data ko ek lambi 1D list mein badal deta hai taake Dense layer usay samajh sake.</li>
+      <li><span class="ln">L7</span> Aakhri layer 10 categories (jaise 10 alag animals) ki probability deti hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Simple Neural Network image ke har pixel ko alag alag treat karta, jo bohot slow aur inefficient hota. CNN filters ke zariye images ke "spatial patterns" (jaise ek line, ek shape) samajhta hai — isi liye face recognition, self-driving cars, aur medical imaging jaisi applications mein CNN standard hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>CNN images ke liye special hai. Convolution features dhoondta hai, Pooling size chhota karta hai, aur aakhir mein Dense layers final prediction dete hain.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="rnn-lstm">
+  <span class="chapter-tag"><span class="chapter-num">20</span> Category E — Advanced / Deep Learning</span>
+  <h2>RNN &amp; LSTM (Sequences Ke Liye)</h2>
+  <p>Kuch data mein <strong>tarteeb (order)</strong> ki bohot ahmiyat hoti hai — jaise ek jumla (sentence) ya stock prices ka pichla record. Aise "sequence data" ke liye RNN (Recurrent Neural Network) design ki gayi hai.</p>
+
+  <h3>RNN Kaise Kaam Karta Hai</h3>
+  <p>Normal Neural Network har input ko alag treat karta hai, lekin RNN ek "hidden state (memory)" rakhta hai jo pichle steps ki information agle step tak le kar jata hai — is tarah wo "context" (pichli baatein) yaad rakh pata hai.</p>
+
+  <h3>Vanishing Gradient Problem &amp; LSTM</h3>
+  <p>Simple RNN lambay sequences mein purani information "bhool" jata hai (isay Vanishing Gradient Problem kehte hain). <strong>LSTM (Long Short-Term Memory)</strong> is masle ko "gates" (Forget Gate, Input Gate, Output Gate) ke zariye hal karta hai, jo decide karte hain kya yaad rakhna hai aur kya bhool jana hai — isi liye LSTM lambay sequences mein behtar kaam karta hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="11" text-anchor="middle" fill="#eaf6ff">
+        <rect x="20" y="30" width="80" height="50" rx="8" fill="rgba(0,255,242,0.1)" stroke="#00fff2"/><text x="60" y="60">"I"</text>
+        <rect x="150" y="30" width="80" height="50" rx="8" fill="rgba(255,0,229,0.1)" stroke="#ff00e5"/><text x="190" y="60">"love"</text>
+        <rect x="280" y="30" width="80" height="50" rx="8" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/><text x="320" y="60">"ML"</text>
+        <rect x="410" y="30" width="80" height="50" rx="8" fill="rgba(57,255,136,0.1)" stroke="#39ff88"/><text x="450" y="60">Output</text>
+      </g>
+      <path d="M100,55 C120,10 140,10 150,55" stroke="#7d87a0" fill="none" marker-end="url(#arrow5)"/>
+      <path d="M230,55 C250,10 270,10 280,55" stroke="#7d87a0" fill="none" marker-end="url(#arrow5)"/>
+      <path d="M360,55 C380,10 400,10 410,55" stroke="#7d87a0" fill="none" marker-end="url(#arrow5)"/>
+      <defs><marker id="arrow5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+      <text x="250" y="110" text-anchor="middle" fill="#a9b4c9" font-size="11">Hidden state (memory) har word ke sath aage jati hai</text>
+    </svg>
+    <p class="diagram-caption">RNN: ek sequence ke har word ko pichle context ke sath process karta hai</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>lstm.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.layers <span class="tok-kw">import</span> LSTM, Embedding
+
+model = Sequential([
+    Embedding(input_dim=<span class="tok-num">10000</span>, output_dim=<span class="tok-num">64</span>),  <span class="tok-com"># words ko vectors mein badlo</span>
+    LSTM(<span class="tok-num">32</span>),                                <span class="tok-com"># sequence process karo</span>
+    Dense(<span class="tok-num">1</span>, activation=<span class="tok-str">"sigmoid"</span>)          <span class="tok-com"># positive/negative</span>
+])</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> <code>Embedding</code> har word ko ek numeric vector mein badalta hai (10000 possible words, har ek 64 numbers se represent hota hai).</li>
+      <li><span class="ln">L5</span> LSTM layer poore sequence ko order ke saath process karti hai, memory rakhte hue.</li>
+      <li><span class="ln">L6</span> Aakhir mein sentiment (positive/negative) ki prediction milti hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Text, awaaz, stock prices — ye sab "sequence data" hain jahan order maayne rakhta hai. Normal Neural Network ya CNN is order ko samajh nahi paate, isi liye RNN/LSTM zaban aur time-series se related har problem ki bunyaad hain (Transformers se pehle ye hi standard tha).</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>RNN sequence data ko memory ke sath process karta hai. LSTM lambay sequences mein behtar hai kyunke ye gates ke zariye zaroori information yaad rakhta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="nlp-transformers">
+  <span class="chapter-tag"><span class="chapter-num">21</span> Category E — Advanced / Deep Learning</span>
+  <h2>NLP &amp; Transformers (Zaban Ki Samajh)</h2>
+  <p>Natural Language Processing (NLP) woh field hai jisme computer insaani zaban (text/awaaz) ko samajhta aur process karta hai — jaise ChatGPT, Google Translate, ya voice assistants.</p>
+
+  <h3>Tokenization</h3>
+  <p>Text ko chhote hisson (tokens — words ya sub-words) mein todna, taake computer usay process kar sake. Misaal: <code>"I love ML"</code> → <code>["I", "love", "ML"]</code>.</p>
+
+  <h3>Word Embeddings</h3>
+  <p>Har word ko numbers ki ek list (vector) mein badalna, is tarah ke milte-julte matlab wale words (jaise "King" aur "Queen") ke vectors bhi aapas mein qareeb hon.</p>
+
+  <h3>Attention Mechanism &amp; Transformers</h3>
+  <p>Purana RNN/LSTM tareeqa sequence ko ek-ek karke (slowly) process karta tha. <strong>Transformer</strong> architecture ne "Attention Mechanism" introduce kiya — jisme model ek sath poore sentence ko dekh kar decide karta hai ke kaunse words ek dusre se sabse zyada related hain. Yehi Transformer architecture GPT, BERT jaise modern Large Language Models (LLMs) ki bunyaad hai.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Poppins" font-size="12" text-anchor="middle" fill="#eaf6ff">
+        <text x="80" y="30">The</text><text x="180" y="30">cat</text><text x="280" y="30">sat</text><text x="380" y="30">down</text>
+      </g>
+      <g stroke="rgba(0,255,242,0.5)" stroke-width="1.2">
+        <line x1="180" y1="40" x2="80" y2="40"/>
+        <line x1="180" y1="40" x2="280" y2="40"/>
+        <line x1="280" y1="40" x2="380" y2="40"/>
+        <line x1="180" y1="45" x2="380" y2="45"/>
+      </g>
+      <text x="250" y="90" text-anchor="middle" fill="#a9b4c9" font-size="11">"Attention" har word ka har doosre word se rishta dekhta hai</text>
+      <text x="250" y="120" text-anchor="middle" fill="#ff00e5" font-size="12" font-family="Orbitron">Transformer</text>
+    </svg>
+    <p class="diagram-caption">Attention Mechanism: model ek sath sab words ke beech rishta samajhta hai</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>tokenize.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.preprocessing.text <span class="tok-kw">import</span> Tokenizer
+
+tokenizer = Tokenizer(num_words=<span class="tok-num">5000</span>)      <span class="tok-com"># sirf top 5000 words rakho</span>
+tokenizer.fit_on_texts(sentences)          <span class="tok-com"># vocabulary banao</span>
+sequences = tokenizer.texts_to_sequences(sentences)  <span class="tok-com"># words -> numbers</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> Sirf sabse zyada use hone wale 5000 words ko "vocabulary" mein rakha, taake data efficient rahe.</li>
+      <li><span class="ln">L4</span> Diye gaye sentences se ek vocabulary (word list) banayi.</li>
+      <li><span class="ln">L5</span> Har sentence ke words ko unke corresponding numbers mein badal diya — ab model ye numbers samajh sakta hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Aaj ke zamane ki sabse mashhoor AI technology (ChatGPT, Claude jaise assistants, translation apps) sab Transformers par bani hain. NLP ki bunyaadi samajh (tokenization, embeddings, attention) hone se ye samajhna asan ho jata hai ke ye modern AI systems andar se kaise kaam karte hain.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>NLP text ko samajhne ka field hai. Tokenization text todta hai, Embeddings words ko numbers mein badalte hain, aur Transformers/Attention modern LLMs (jaise GPT) ki bunyaad hain.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="ensemble-learning">
+  <span class="chapter-tag"><span class="chapter-num">22</span> Category E — Advanced / Deep Learning</span>
+  <h2>Ensemble Learning</h2>
+  <p>Ensemble Learning ka basic idea hai: <strong>"Bohot saare kamzor models mil kar ek mazboot model bana sakte hain"</strong> — bilkul jaise ek group ka faisla akele insaan ke faisle se zyada bharosemand hota hai.</p>
+
+  <h3>Bagging (Bootstrap Aggregating)</h3>
+  <p>Data ke alag alag random samples par, alag alag models (jaise kai Decision Trees) parallel train kiye jate hain, aur aakhir mein sab ka "majority vote" ya average liya jata hai. <strong>Random Forest</strong> (Chapter 10) isi ka sabse mashhoor example hai.</p>
+
+  <h3>Boosting</h3>
+  <p>Is mein models ek ke baad ek (sequentially) train hote hain, aur har naya model pichle model ki ghaltiyon par khaas focus karta hai unhe theek karne ke liye. Mashhoor Boosting algorithms: <strong>AdaBoost</strong>, <strong>Gradient Boosting</strong>, aur <strong>XGBoost</strong> (jo competitions mein bohot use hota hai).</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="10.5" text-anchor="middle" fill="#eaf6ff">
+        <rect x="20" y="20" width="80" height="50" rx="8" fill="rgba(0,255,242,0.1)" stroke="#00fff2"/><text x="60" y="50">Tree 1</text>
+        <rect x="120" y="20" width="80" height="50" rx="8" fill="rgba(255,0,229,0.1)" stroke="#ff00e5"/><text x="160" y="50">Tree 2</text>
+        <rect x="220" y="20" width="80" height="50" rx="8" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/><text x="260" y="50">Tree 3</text>
+        <rect x="320" y="20" width="80" height="50" rx="8" fill="rgba(57,255,136,0.1)" stroke="#39ff88"/><text x="360" y="50">Tree N</text>
+        <rect x="150" y="105" width="180" height="35" rx="8" fill="rgba(255,209,102,0.12)" stroke="#ffd166"/><text x="240" y="128">Final Vote / Average</text>
+      </g>
+      <line x1="60" y1="70" x2="200" y2="105" stroke="#7d87a0"/>
+      <line x1="160" y1="70" x2="220" y2="105" stroke="#7d87a0"/>
+      <line x1="260" y1="70" x2="260" y2="105" stroke="#7d87a0"/>
+      <line x1="360" y1="70" x2="290" y2="105" stroke="#7d87a0"/>
+    </svg>
+    <p class="diagram-caption">Ensemble Learning: kai models ke result milkar ek final, mazboot faisla dete hain</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>xgboost_example.py</span></div>
+    <pre><code><span class="tok-kw">from</span> xgboost <span class="tok-kw">import</span> XGBClassifier
+
+model = XGBClassifier(n_estimators=<span class="tok-num">100</span>, learning_rate=<span class="tok-num">0.1</span>)
+model.fit(X_train, y_train)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> <code>n_estimators=100</code> matlab 100 chhote trees ek ke baad ek train honge; <code>learning_rate</code> batata hai har naya tree kitni "correction" karega.</li>
+      <li><span class="ln">L4</span> Model training data se seekhta hai, har step par pichli galtiyon ko kam karte hue.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ensemble methods (khaas taur par XGBoost) ne Kaggle jaisi competitions mein aksar sabse behtareen results diye hain, kyunke ye single model ki kamzoriyon ko doosre models se cover kar dete hain — isi liye industry mein ye bohot mashhoor hain.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Bagging (Random Forest) models ko parallel train kar ke vote leta hai. Boosting (XGBoost) models ko sequentially train karke pichli galtiyan theek karta hai. Dono single model se behtar result dete hain.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="reinforcement-learning">
+  <span class="chapter-tag"><span class="chapter-num">23</span> Category E — Advanced / Deep Learning</span>
+  <h2>Reinforcement Learning (RL)</h2>
+  <p>Reinforcement Learning ek alag hi tareeqe ka learning hai — is mein na to labeled data hota hai, na hi patterns dhoondne hote hain. Iski jagah ek <strong>Agent</strong> apne <strong>Environment</strong> mein khud actions le kar, reward/punishment se seekhta hai.</p>
+
+  <h3>Bunyaadi Elements</h3>
+  <ul>
+    <li><strong>Agent:</strong> Woh system jo faisle karta hai (jaise game khelne wala AI).</li>
+    <li><strong>Environment:</strong> Woh duniya jisme agent kaam karta hai (jaise game ka board).</li>
+    <li><strong>State:</strong> Environment ki current situation.</li>
+    <li><strong>Action:</strong> Agent jo qadam uthata hai.</li>
+    <li><strong>Reward:</strong> Achay action par positive number, bure par negative.</li>
+    <li><strong>Policy:</strong> Agent ki "strategy" ke kis state mein kya action lena hai.</li>
+  </ul>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="13" text-anchor="middle" fill="#eaf6ff">
+        <circle cx="130" cy="80" r="60" fill="rgba(0,255,242,0.1)" stroke="#00fff2"/>
+        <text x="130" y="85">Agent</text>
+        <circle cx="370" cy="80" r="60" fill="rgba(255,0,229,0.1)" stroke="#ff00e5"/>
+        <text x="370" y="85">Environment</text>
+      </g>
+      <path d="M195,60 C260,40 300,40 310,60" stroke="#39ff88" fill="none" marker-end="url(#arrow6)"/>
+      <text x="250" y="35" text-anchor="middle" fill="#39ff88" font-size="11">Action</text>
+      <path d="M310,100 C260,120 200,120 195,100" stroke="#ffd166" fill="none" marker-end="url(#arrow6)"/>
+      <text x="250" y="140" text-anchor="middle" fill="#ffd166" font-size="11">State + Reward</text>
+      <defs><marker id="arrow6" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">RL Loop: Agent action leta hai → Environment reward + naya state deta hai → cycle repeat hota hai</p>
+  </div>
+
+  <h3>Q-Learning (Basic Idea)</h3>
+  <p>Q-Learning mein agent ek "table" (ya Deep Q-Network mein Neural Network) rakhta hai jo har state-action combination ki "value" batati hai — yani "is state mein ye action lena kitna faidemand hoga". Waqt ke sath agent trial-and-error se ye values behtar karta jata hai.</p>
+
+  <div class="example-box">
+    <span class="label">💡 Real-Life Example</span>
+    <p>AlphaGo (Go game champion AI), self-driving cars ke decision-making systems, aur robotics mein movement control — ye sab Reinforcement Learning ki mashhoor applications hain.</p>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Kuch problems mein "sahi jawab" pehle se maujood nahi hota, sirf ye pata hota hai ke result acha hai ya bura (reward). Aise problems (games, robotics, resource allocation) ke liye Supervised/Unsupervised nahi, Reinforcement Learning hi sahi tareeqa hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>RL mein Agent, Environment ke sath interact karke, reward/punishment se apni Policy behtar karta hai. Yahan Category E (Advanced/Deep Learning) complete hui — ab hum course ke aakhri, practical hisse ki taraf badhte hain.</p>
+  </div>
+</section>
+
+
+<section class="wrap chapter-section" id="model-deployment">
+  <span class="chapter-tag"><span class="chapter-num">24</span> Category F — Practical &amp; Career</span>
+  <h2>Model Deployment</h2>
+  <p>Ek trained model sirf Jupyter Notebook mein baithe rehne se kisi kaam ka nahi — usay real logon tak pohanchana (Deployment) zaroori hai, taake app ya website use kar sake.</p>
+
+  <h3>Step 1: Model Ko Save Karna</h3>
+  <p>Training mein waqt lagta hai, isi liye trained model ko ek file mein "save" kar liya jata hai (<code>pickle</code> ya <code>joblib</code> se), taake dobara training ki zaroorat na pare — bas file load karo aur predict karo.</p>
+
+  <h3>Step 2: API Banana</h3>
+  <p><strong>Flask</strong> ya <strong>FastAPI</strong> jaise Python frameworks se model ke around ek chhoti si "web service (API)" bana di jati hai. Ye API data receive karti hai, model se prediction nikalti hai, aur result wapas bhejti hai.</p>
+
+  <h3>Step 3: Cloud Par Deploy Karna</h3>
+  <p>Aakhir mein is API/app ko cloud platforms (jaise AWS, Heroku, ya Streamlit Cloud) par upload kiya jata hai taake ye internet par kisi bhi jagah se accessible ho jaye.</p>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 550 120" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="11" text-anchor="middle" fill="#eaf6ff">
+        <rect x="10" y="30" width="110" height="55" rx="10" fill="rgba(0,255,242,0.09)" stroke="#00fff2"/><text x="65" y="62">Trained Model</text>
+        <rect x="155" y="30" width="110" height="55" rx="10" fill="rgba(255,0,229,0.09)" stroke="#ff00e5"/><text x="210" y="62">Save (.pkl)</text>
+        <rect x="300" y="30" width="110" height="55" rx="10" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/><text x="355" y="62">Flask API</text>
+        <rect x="440" y="30" width="105" height="55" rx="10" fill="rgba(57,255,136,0.09)" stroke="#39ff88"/><text x="490" y="62">Cloud / Users</text>
+      </g>
+      <g stroke="#7d87a0" marker-end="url(#arrow7)">
+        <line x1="122" y1="57" x2="153" y2="57"/><line x1="267" y1="57" x2="298" y2="57"/><line x1="412" y1="57" x2="438" y2="57"/>
+      </g>
+      <defs><marker id="arrow7" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">Deployment Pipeline: Model → Save → API → Cloud (users tak pohanchna)</p>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>save_model.py</span></div>
+    <pre><code><span class="tok-kw">import</span> joblib
+
+joblib.dump(model, <span class="tok-str">"house_price_model.pkl"</span>)   <span class="tok-com"># model ko file mein save karo</span>
+
+loaded_model = joblib.load(<span class="tok-str">"house_price_model.pkl"</span>)  <span class="tok-com"># baad mein wapas load karo</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> Trained model ko <code>.pkl</code> file mein hamesha ke liye save kar diya.</li>
+      <li><span class="ln">L5</span> Kisi bhi doosre program ya server se yehi model dobara load kiya ja sakta hai bina dobara train kiye.</li>
+    </ol>
+  </div>
+
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>app.py — Flask API</span></div>
+    <pre><code><span class="tok-kw">from</span> flask <span class="tok-kw">import</span> Flask, request, jsonify
+<span class="tok-kw">import</span> joblib
+
+app = Flask(__name__)
+model = joblib.load(<span class="tok-str">"house_price_model.pkl"</span>)
+
+<span class="tok-fn">@app.route</span>(<span class="tok-str">"/predict"</span>, methods=[<span class="tok-str">"POST"</span>])
+<span class="tok-kw">def</span> predict():
+    data = request.json[<span class="tok-str">"size"</span>]
+    prediction = model.predict([[data]])
+    <span class="tok-kw">return</span> jsonify({<span class="tok-str">"price"</span>: prediction[<span class="tok-num">0</span>]})</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4-5</span> Ek Flask app banaya aur saved model load kiya.</li>
+      <li><span class="ln">L7-8</span> <code>/predict</code> naam ka ek "endpoint" banaya jo POST request accept karega.</li>
+      <li><span class="ln">L9</span> User se aane wala "size" data nikala.</li>
+      <li><span class="ln">L10</span> Model se prediction nikali.</li>
+      <li><span class="ln">L11</span> Prediction ko JSON format mein wapas bheja — is se koi bhi website/app is API ko call karke price maloom kar sakti hai.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Bohot se log model banana seekh lete hain lekin ye nahi jaante ke usay "real product" mein kaise badla jaye. Deployment ye pul (bridge) hai jo ek Notebook experiment ko ek real, usable app mein badalta hai — ye industry mein sabse zyada demand wali skill hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Model ko save karo (pickle/joblib), API banao (Flask/FastAPI), aur cloud par deploy karo. Isi tarah model real logon tak pohanchta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="end-to-end-project">
+  <span class="chapter-tag"><span class="chapter-num">25</span> Category F — Practical &amp; Career</span>
+  <h2>End-to-End Project Walkthrough</h2>
+  <p>Ab tak humne har concept alag alag seekha — is chapter mein hum sab kuch jorh kar ek poora project ("House Price Prediction") shuru se aakhir tak dekhte hain, taake pata chale sab chapters mil kar kaise kaam karte hain.</p>
+
+  <ol>
+    <li><strong>Problem Define Kiya (Ch.3):</strong> "Ghar ke size, location, aur rooms se price predict karni hai."</li>
+    <li><strong>Data Collect Kiya (Ch.3):</strong> Kaggle se "houses.csv" dataset liya (Resources section).</li>
+    <li><strong>Preprocessing Ki (Ch.6):</strong> Missing sizes ko average se bhara, "city" ko one-hot encode kiya, scaling ki.</li>
+    <li><strong>EDA Ki (Ch.7):</strong> Scatter plot se dekha size aur price ka strong positive rishta hai.</li>
+    <li><strong>Feature Engineering Ki (Ch.8):</strong> "price_per_sqft" jaisa naya feature banaya.</li>
+    <li><strong>Model Train Kiya (Ch.9):</strong> Linear Regression aur Random Forest (Ch.10) dono try kiye.</li>
+    <li><strong>Evaluate Kiya (Ch.11):</strong> RMSE aur R² Score compare kiye, Random Forest behtar nikla.</li>
+    <li><strong>Overfitting Check Ki (Ch.12):</strong> Training aur test accuracy qareeb thi, to overfitting nahi thi.</li>
+    <li><strong>Tuning Ki (Ch.13):</strong> GridSearchCV se Random Forest ki best settings dhoondi.</li>
+    <li><strong>Deploy Kiya (Ch.24):</strong> Model ko Flask API bana kar ek simple website ke sath jorha.</li>
+  </ol>
+
+  <div class="example-box">
+    <span class="label">💡 Is Se Kya Seekha</span>
+    <p>Ek acha ML project sirf "model.fit()" nahi hota — ye ek poora safar hai jo problem samajhne se shuru ho kar, data clean karne, sahi algorithm chunne, evaluate karne, aur aakhir mein duniya ke saamne pesh karne (deploy) tak jata hai.</p>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Interviews aur real jobs mein log individual concepts nahi, poore projects dekhte hain. Ek end-to-end project apne portfolio (GitHub) mein dikhana ye sabit karta hai ke aap sirf theory nahi, amali (practical) kaam bhi kar sakte hain.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Ye poora course ek connected pipeline hai — har chapter agle chapter ki bunyaad hai. Isi tarteeb se koi bhi naya project shuru se aakhir tak complete kiya ja sakta hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="ml-ethics">
+  <span class="chapter-tag"><span class="chapter-num">26</span> Category F — Practical &amp; Career</span>
+  <h2>ML Ethics &amp; Best Practices</h2>
+  <p>Machine Learning models real logon ki zindagi par asar dalte hain — job applications, loan approvals, medical diagnosis. Isi liye ML ko zimmedari (responsibility) ke sath banana bohot zaroori hai.</p>
+
+  <h3>Bias aur Fairness</h3>
+  <p>Agar training data mein pehle se koi bias (jaanibdari) maujood ho (jaise ek gender/race ko kam represent kiya gaya ho), to model bhi wahi bias seekh leta hai aur unfair faisle kar sakta hai. Isi liye data ko diverse aur balanced rakhna zaroori hai.</p>
+
+  <h3>Data Privacy</h3>
+  <p>ML models aksar logon ka personal data (health records, financial info) use karte hain. Is data ko surakshit (secure) rakhna aur logon ki privacy ka khayal rakhna qanooni aur akhlaaqi (ethical) dono lehaz se zaroori hai.</p>
+
+  <h3>Explainability</h3>
+  <p>Sirf ye kaafi nahi ke model sahi jawab de — kabhi kabhi (khaas taur par medical/legal cases mein) ye samajhna bhi zaroori hota hai ke model ne <em>kyun</em> ye faisla kiya. Isi liye "Explainable AI" (jaise SHAP, LIME tools) ki ahmiyat barh rahi hai.</p>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Ek biased ya ghalat ML model sirf technical mistake nahi — ye kisi insaan ki zindagi (job, loan, health) par bura asar daal sakta hai. Ek professional ML expert hamesha apne model ki fairness aur zimmedari ka khayal rakhta hai, sirf accuracy ka nahi.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>ML banate waqt bias, privacy aur explainability ka khayal rakhna utna hi zaroori hai jitna accuracy ka. Zimmedar AI hi long-term mein bharosemand AI hoti hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="career-roadmap">
+  <span class="chapter-tag"><span class="chapter-num">27</span> Category F — Practical &amp; Career</span>
+  <h2>Career Roadmap &amp; Next Steps</h2>
+  <p>Mubarak ho — agar aap yahan tak pohanch gaye hain, to aapne ek complete ML foundation cover kar li hai! Ab agla sawal: <strong>"Aage kya karein?"</strong></p>
+
+  <table>
+    <tr><th>Stage</th><th>Focus</th><th>Karne Wala Kaam</th></tr>
+    <tr><td>Beginner ✅</td><td>Foundations + Classical ML</td><td>Ye course complete karna, chhote projects banana (Titanic, Iris dataset)</td></tr>
+    <tr><td>Intermediate</td><td>Real Projects + Kaggle</td><td>Kaggle competitions try karna, apna GitHub portfolio banana</td></tr>
+    <tr><td>Advanced</td><td>Deep Learning Specialization</td><td>CNN/RNN/Transformers par gehrayi se kaam, apne khud ke datasets par models train karna</td></tr>
+    <tr><td>Professional</td><td>Deployment + MLOps</td><td>Models ko production mein deploy karna, monitoring, cloud platforms seekhna</td></tr>
+  </table>
+
+  <h3>Mumkin Career Roles</h3>
+  <ul>
+    <li><strong>Data Analyst:</strong> Data explore karke business insights nikalna (EDA-focused).</li>
+    <li><strong>Machine Learning Engineer:</strong> Models banana, train karna aur production mein deploy karna.</li>
+    <li><strong>Data Scientist:</strong> Data se sawalon ke jawab dhoondna, models aur statistics dono use karna.</li>
+    <li><strong>Deep Learning / NLP Engineer:</strong> Neural Networks, Computer Vision ya Language Models par specialize karna.</li>
+  </ul>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Sirf theory seekh kar rukna kaafi nahi — ek clear roadmap hone se pata chalta hai ke agla qadam kya lena hai, chahe wo ek naya project ho, ek certification ho, ya ek job application. Consistency (roz thora sa kaam) is field mein sabse zyada faida deti hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Course Ka Aakhri Khulasa</span>
+    <p>Aap ne ML kya hai, uski types, math, data preprocessing, classical algorithms, Deep Learning, aur deployment tak — sab kuch cover kar liya hai. Ab practice, projects, aur Resources section (course ki shuruaat) mein diye gaye tools se apna safar jaari rakhein. <strong>Good luck! 🚀</strong></p>
+  </div>
+</section>
+
+
+<footer>
+  <span class="holo-text">ML MASTERY</span>
+  Banaya gaya hai un logon ke liye jo Machine Learning ko zero se seekhna chahte hain — asan lafzon mein, poori tafseel ke saath.<br>
+  Har code line explain ki gayi hai taake sirf "copy-paste" nahi, balke "samajh kar likhna" seekhein.
+  <div style="margin-top:22px; padding-top:20px; border-top:1px solid var(--glass-border); font-size:12.5px;">
+    Prepared by <strong style="color:var(--neon-cyan);">SAIPK</strong> &nbsp;•&nbsp; Contact us: <a href="mailto:saipk2026@gmail.com" style="color:var(--neon-magenta); text-decoration:none;">saipk2026@gmail.com</a>
+  </div>
+</footer>
+
+</main>
+
+<script>
+// Sidebar toggle for mobile
+const menuToggle=document.getElementById('menuToggle');
+const sidebar=document.getElementById('sidebar');
+menuToggle.addEventListener('click',()=>sidebar.classList.toggle('open'));
+document.querySelectorAll('#sidebar a').forEach(a=>{
+  a.addEventListener('click',()=>{ if(window.innerWidth<=900) sidebar.classList.remove('open'); });
+});
+
+// Scroll spy + progress bar
+const links=document.querySelectorAll('#sidebar a[href^="#"]');
+const sections=[...links].map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function onScroll(){
+  const scrollTop=window.scrollY;
+  const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progressBar').style.width=(docHeight>0?(scrollTop/docHeight*100):0)+'%';
+
+  let current=sections[0];
+  for(const sec of sections){
+    if(sec.getBoundingClientRect().top-120<=0) current=sec;
+  }
+  links.forEach(a=>a.classList.remove('active'));
+  const match=[...links].find(a=>document.querySelector(a.getAttribute('href'))===current);
+  if(match) match.classList.add('active');
+}
+window.addEventListener('scroll',onScroll);
+onScroll();
+</script>
+</body>
+</html>

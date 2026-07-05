@@ -5,18 +5,6 @@ A complete, single-file **Machine Learning course** — Beginner to Advanced —
 **Prepared by SAIPK**
 **Contact:** [saipk2026@gmail.com](mailto:saipk2026@gmail.com)
 
----
-
-## 🔗 Live Demo
-
-Once uploaded to GitHub Pages, your course will be live at:
-
-```
-https://<your-github-username>.github.io/<repo-name>/
-```
-
-(GitHub Pages automatically serves `index.html`, which is already included in this repo.)
-
 ## 📂 Files
 
 | File | Purpose |

@@ -95,10 +95,17 @@ h1,h2,h3,h4,.brand,.chapter-num{font-family:'Orbitron',sans-serif;}
 }
 #sidebar::-webkit-scrollbar{width:6px;}
 #sidebar::-webkit-scrollbar-thumb{background:var(--neon-purple); border-radius:10px;}
+.brand-row{display:flex; align-items:center; gap:10px; margin:4px 0 6px 8px;}
+.brand-logo{flex-shrink:0; filter:drop-shadow(0 0 8px rgba(57,255,136,0.45));}
 .brand{
-  font-size:20px; font-weight:900; letter-spacing:1px; margin:4px 0 6px 8px;
+  font-size:20px; font-weight:900; letter-spacing:1px; margin:0;
 }
 .brand span{display:block; font-family:'Poppins'; font-size:11px; font-weight:400; color:var(--text-dimmer); letter-spacing:2px;}
+
+.footer-logo-row{display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:18px;}
+.footer-logo-row .sipk-name{font-family:'Orbitron'; font-size:17px; font-weight:900; letter-spacing:1px;}
+.footer-logo-row .sipk-name .g{color:var(--neon-green);}
+.footer-logo-row .sipk-tag{font-size:11px; letter-spacing:2px; color:var(--text-dimmer); text-transform:uppercase;}
 .progress-wrap{
   margin:14px 8px 20px; height:6px; border-radius:10px; background:rgba(255,255,255,0.08); overflow:hidden;
 }
@@ -276,7 +283,24 @@ footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
 <button id="menuToggle">☰</button>
 
 <nav id="sidebar">
-  <div class="brand holo-text">ML MASTERY <span>Beginner → Advanced</span></div>
+  <div class="brand-row">
+    <svg class="brand-logo" width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="94" fill="rgba(255,255,255,0.04)" stroke="#39ff88" stroke-width="3"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+      <g stroke="#39ff88" stroke-width="3" fill="#39ff88">
+        <circle cx="32" cy="52" r="4"/><circle cx="32" cy="78" r="4"/>
+        <line x1="32" y1="52" x2="54" y2="52"/><line x1="32" y1="78" x2="48" y2="78"/>
+      </g>
+      <text x="100" y="128" text-anchor="middle" font-family="Orbitron" font-weight="900" font-size="72" fill="#eaf6ff">SIPK</text>
+      <g transform="translate(93,92)">
+        <circle cx="0" cy="0" r="12" fill="#39ff88"/>
+        <circle cx="5" cy="-4" r="10" fill="#05050f"/>
+        <text x="15" y="-4" font-size="11" fill="#39ff88">★</text>
+      </g>
+      <text x="152" y="152" font-family="Courier New" font-size="20" font-weight="700" fill="#39ff88">&lt;/&gt;</text>
+    </svg>
+    <div class="brand holo-text">ML MASTERY <span>Beginner → Advanced</span></div>
+  </div>
   <div class="progress-wrap"><div id="progressBar"></div></div>
   <a href="#top" class="res-link">🏠 Shuru (Home)</a>
   <a href="#resources" class="res-link">🧰 Resources (Pehle Ye Parhein)</a>
@@ -317,14 +341,15 @@ footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
   <div class="nav-cat">F. Practical &amp; Career</div>
   <a href="#model-deployment">24. Model Deployment</a>
   <a href="#end-to-end-project">25. End-to-End Project</a>
-  <a href="#ml-ethics">26. ML Ethics</a>
-  <a href="#career-roadmap">27. Career Roadmap</a>
+  <a href="#model-training-lab">26. Naya Model Banana &amp; Train Karna</a>
+  <a href="#ml-ethics">27. ML Ethics</a>
+  <a href="#career-roadmap">28. Career Roadmap</a>
 </nav>
 
 <main>
 
 <header class="hero" id="top">
-  <div class="badge">⬡ 27 CHAPTERS · BEGINNER → ADVANCED · HOLOGRAPHIC EDITION</div>
+  <div class="badge">⬡ 28 CHAPTERS · BEGINNER → ADVANCED · HOLOGRAPHIC EDITION</div>
   <h1 class="holo-text">Machine Learning<br>Mastery Course</h1>
   <p class="sub">Ye ek complete Machine Learning course hai jo <strong style="color:#eaf6ff">asan Roman Urdu</strong> mein likha gaya hai — bilkul shuru (ML kya hai) se lekar advanced Deep Learning aur real-world deployment tak. Har chapter mein: concept ki simple explanation, ye "kyun zaroori hai", real-life example, diagram, aur line-by-line explain kiya hua code milega.</p>
   <div class="cta">
@@ -332,7 +357,7 @@ footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
     <a href="#ml-kya-hai" class="btn btn-ghost">Seedha Chapter 1 Pe Jayein</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><b>27</b><span>CHAPTERS</span></div>
+    <div class="stat"><b>28</b><span>CHAPTERS</span></div>
     <div class="stat"><b>6</b><span>CATEGORIES</span></div>
     <div class="stat"><b>15+</b><span>RESOURCES EXPLAINED</span></div>
     <div class="stat"><b>0</b><span>JARGON BINA EXPLAIN</span></div>
@@ -511,7 +536,6 @@ footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
     <span class="label">✅ Quick Setup Checklist</span>
     <p>1) Python install karein (ya seedha Google Colab use karein — kuch install nahi karna padta) &nbsp;•&nbsp; 2) NumPy, Pandas, Matplotlib, Scikit-learn install/import karna seekh lein &nbsp;•&nbsp; 3) Kaggle par account bana lein taake practice datasets mil sakein &nbsp;•&nbsp; 4) GitHub account bana lein apna kaam save karne ke liye.</p>
   </div>
-
 </section>
 
 <section class="wrap chapter-section" id="ml-kya-hai">
@@ -689,7 +713,7 @@ footer .holo-text{font-size:18px; display:block; margin-bottom:10px;}
   <p>Mean (average), Median, Standard Deviation (data kitna phaila hua hai) jaise concepts data ko samajhne mein madad karte hain. Probability hume batati hai ke koi event kitne chance se hoga — ye Naive Bayes jaisi classification algorithms ki bunyaad hai.</p>
 
   <h3>3. Calculus — Gradient / Derivative</h3>
-  <p>Jab model training hoti hai, to usay apni "galti" (error) kam karni hoti hai. Derivative (rate of change) hume batata hai ke agar hum model ki settings thori si badlein, to error kitna kam/zyada hoga. Isi principle par "Gradient Descent" (Chapter 9) kaam karta hai, jo tقریبا har ML algorithm ke andar chupa hota hai.</p>
+  <p>Jab model training hoti hai, to usay apni "galti" (error) kam karni hoti hai. Derivative (rate of change) hume batata hai ke agar hum model ki settings thori si badlein, to error kitna kam/zyada hoga. Isi principle par "Gradient Descent" (Chapter 9) kaam karta hai, jo تقریبا har ML algorithm ke andar chupa hota hai.</p>
 
   <table>
     <tr><th>Math Topic</th><th>Kahan Use Hota Hai</th></tr>
@@ -758,6 +782,7 @@ df = pd.read_csv(<span class="tok-str">"houses.csv"</span>)   <span class="tok-c
   </div>
 </section>
 
+<!-- CHAPTERS_FOUNDATIONS -->
 
 <section class="wrap chapter-section" id="data-preprocessing">
   <span class="chapter-tag"><span class="chapter-num">6</span> Category B — Data Ki Tayari</span>
@@ -928,6 +953,7 @@ df[<span class="tok-str">"age_group"</span>] = pd.cut(df[<span class="tok-str">"
   </div>
 </section>
 
+<!-- CHAPTERS_DATA -->
 
 <section class="wrap chapter-section" id="regression">
   <span class="chapter-tag"><span class="chapter-num">9</span> Category C — Supervised Learning</span>
@@ -1237,6 +1263,7 @@ grid.fit(X_train, y_train)
   </div>
 </section>
 
+<!-- CHAPTERS_SUPERVISED -->
 
 <section class="wrap chapter-section" id="clustering">
   <span class="chapter-tag"><span class="chapter-num">14</span> Category D — Unsupervised Learning</span>
@@ -1364,6 +1391,7 @@ X_reduced = pca.fit_transform(X)   <span class="tok-com"># naya, chhota dataset<
   </div>
 </section>
 
+<!-- CHAPTERS_UNSUPERVISED -->
 
 <section class="wrap chapter-section" id="neural-networks">
   <span class="chapter-tag"><span class="chapter-num">17</span> Category E — Advanced / Deep Learning</span>
@@ -1737,6 +1765,7 @@ model.fit(X_train, y_train)</code></pre>
   </div>
 </section>
 
+<!-- CHAPTERS_ADVANCED -->
 
 <section class="wrap chapter-section" id="model-deployment">
   <span class="chapter-tag"><span class="chapter-num">24</span> Category F — Practical &amp; Career</span>
@@ -1848,8 +1877,254 @@ model = joblib.load(<span class="tok-str">"house_price_model.pkl"</span>)
   </div>
 </section>
 
-<section class="wrap chapter-section" id="ml-ethics">
+<section class="wrap chapter-section" id="model-training-lab">
   <span class="chapter-tag"><span class="chapter-num">26</span> Category F — Practical &amp; Career</span>
+  <h2>Naya Model Banana Aur Train Karna — Complete Hands-On Lab</h2>
+  <p>Is chapter mein hum poore course ki tamam cheezein jorh kar <strong>bilkul shuru se ek naya model banayenge aur train karenge</strong> — is dafa sirf concept ke tor par nahi, balke har step ko practically, code ke sath, mukammal tareeqe se. Ye chapter do hisson mein baata gaya hai: <strong>Part A — Classical ML Model</strong> (Scikit-learn ke sath) aur <strong>Part B — Deep Learning / Neural Network Model</strong> (Keras ke sath). Dono hi tareeqe industry mein use hote hain, isi liye dono step-by-step seekhna zaroori hai.</p>
+
+  <div class="tags-row">
+    <span class="pill">Part A: Scikit-learn Model</span>
+    <span class="pill">Part B: Keras Neural Network</span>
+    <span class="pill">Step-by-Step</span>
+    <span class="pill">Har Line Explained</span>
+  </div>
+
+  <h3 style="color:var(--neon-cyan);">🅰️ Part A — Classical ML Model Banana Aur Train Karna</h3>
+  <p>Hum ek Classification model banayenge jo phool (flower) ki naapain (measurements) dekh kar uski species predict karega — ye ek mashhoor beginner dataset "Iris" hai.</p>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 1 — Zaroori Libraries Import Karna</h4>
+  <p>Sabse pehle wo tamam tools import karte hain jo poore process mein use honge.</p>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step1_imports.py</span></div>
+    <pre><code><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+<span class="tok-kw">from</span> sklearn.model_selection <span class="tok-kw">import</span> train_test_split
+<span class="tok-kw">from</span> sklearn.preprocessing <span class="tok-kw">import</span> StandardScaler
+<span class="tok-kw">from</span> sklearn.ensemble <span class="tok-kw">import</span> RandomForestClassifier
+<span class="tok-kw">from</span> sklearn.metrics <span class="tok-kw">import</span> accuracy_score, classification_report
+<span class="tok-kw">import</span> joblib</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Pandas — data ko table (DataFrame) ki tarah load/handle karne ke liye.</li>
+      <li><span class="ln">L2</span> <code>train_test_split</code> — data ko training aur testing hison mein baantne ke liye.</li>
+      <li><span class="ln">L3</span> <code>StandardScaler</code> — features ko ek jaisi range mein laane ke liye (Chapter 6).</li>
+      <li><span class="ln">L4</span> <code>RandomForestClassifier</code> — hamara chuna hua algorithm (Chapter 10).</li>
+      <li><span class="ln">L5</span> Evaluation metrics — model ki performance naapne ke liye (Chapter 11).</li>
+      <li><span class="ln">L6</span> <code>joblib</code> — trained model ko file mein save karne ke liye (Chapter 24).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 2 — Dataset Load Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step2_load_data.py</span></div>
+    <pre><code>df = pd.read_csv(<span class="tok-str">"iris.csv"</span>)
+<span class="tok-fn">print</span>(df.shape)     <span class="tok-com"># kitni rows aur columns hain</span>
+<span class="tok-fn">print</span>(df.head())    <span class="tok-com"># pehli 5 rows dekho</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> CSV file ko DataFrame mein load kiya — is mein columns hain: sepal_length, sepal_width, petal_length, petal_width, species.</li>
+      <li><span class="ln">L2</span> <code>.shape</code> batata hai (rows, columns) — jaise (150, 5).</li>
+      <li><span class="ln">L3</span> Shuru ki 5 rows dekh kar andaza lagate hain data kaisa dikhta hai.</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 3 — Features (X) Aur Target (y) Alag Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step3_split_xy.py</span></div>
+    <pre><code>X = df.drop(<span class="tok-str">"species"</span>, axis=<span class="tok-num">1</span>)   <span class="tok-com"># species ke ilawa sab columns = features</span>
+y = df[<span class="tok-str">"species"</span>]                    <span class="tok-com"># sirf species column = target</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> <code>drop("species", axis=1)</code> se "species" column hata kar baaqi sab (4 measurements) ko <code>X</code> (input features) banaya.</li>
+      <li><span class="ln">L2</span> <code>y</code> mein sirf wo column rakha jo hum predict karna chahte hain (target/label).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 4 — Train/Test Split Aur Scaling</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step4_split_scale.py</span></div>
+    <pre><code>X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=<span class="tok-num">0.2</span>, random_state=<span class="tok-num">42</span>
+)   <span class="tok-com"># 80% training, 20% testing</span>
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)   <span class="tok-com"># training data se seekho aur scale karo</span>
+X_test = scaler.transform(X_test)         <span class="tok-com"># wahi scaling test data par apply karo</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1-3</span> Data ko 80% training aur 20% testing mein baanta. <code>random_state=42</code> se har baar wahi split milega (reproducibility ke liye).</li>
+      <li><span class="ln">L6</span> <code>fit_transform()</code> training data se mean/std dev seekhta hai aur usay scale karta hai.</li>
+      <li><span class="ln">L7</span> <code>transform()</code> (bina <code>fit</code>) sirf wahi seekhi hui scaling test data par apply karta hai — taake test data ka "asli" andaza na mile model ko.</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 5 — Model Banana</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step5_create_model.py</span></div>
+    <pre><code>model = RandomForestClassifier(
+    n_estimators=<span class="tok-num">100</span>,   <span class="tok-com"># 100 decision trees banao</span>
+    max_depth=<span class="tok-num">5</span>,         <span class="tok-com"># har tree zyada se zyada 5 level gehri</span>
+    random_state=<span class="tok-num">42</span>
+)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L2</span> <code>n_estimators=100</code> — Random Forest 100 alag alag Decision Trees banayega aur unka vote lega (Chapter 22).</li>
+      <li><span class="ln">L3</span> <code>max_depth=5</code> — trees ko zyada gehra hone se roka (overfitting bachao, Chapter 12).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 6 — Model Ko Train Karna (Asal "Seekhna" Yahan Hota Hai)</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step6_train.py</span></div>
+    <pre><code>model.fit(X_train, y_train)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Ye ek line poora "training" karti hai — model training data (X_train) aur uske sahi jawabaat (y_train) dekh kar, andar hi andar patterns seekh leta hai. Yehi woh moment hai jahan "Machine Learning" waqai mein hoti hai.</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 7 — Predictions Aur Evaluation</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step7_evaluate.py</span></div>
+    <pre><code>predictions = model.predict(X_test)
+
+<span class="tok-fn">print</span>(<span class="tok-str">"Accuracy:"</span>, accuracy_score(y_test, predictions))
+<span class="tok-fn">print</span>(classification_report(y_test, predictions))</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Model se un test examples par prediction karwayi jo usne kabhi nahi dekhe.</li>
+      <li><span class="ln">L3</span> Accuracy score se pata chalta hai kitne percent predictions sahi thi.</li>
+      <li><span class="ln">L4</span> <code>classification_report</code> Precision, Recall, F1-Score — sab ek sath dikha deta hai (Chapter 11).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 8 — Model Ko Save Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>step8_save.py</span></div>
+    <pre><code>joblib.dump(model, <span class="tok-str">"iris_model.pkl"</span>)
+joblib.dump(scaler, <span class="tok-str">"iris_scaler.pkl"</span>)   <span class="tok-com"># scaler bhi save karo!</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> Trained model ko file mein save kiya taake dobara train na karna pare (Chapter 24).</li>
+      <li><span class="ln">L2</span> Scaler ko bhi save karna zaroori hai — kyunke naye data par bhi wahi scaling apply karni hogi jo training ke waqt use hui thi.</li>
+    </ol>
+  </div>
+
+  <h3 style="color:var(--neon-cyan); margin-top:44px;">🅱️ Part B — Neural Network Model Banana Aur Train Karna (Deep Learning)</h3>
+  <p>Ab hum wahi tarah ka model, lekin Neural Network (Chapter 17) ke zariye Keras mein banayenge — taake dono tareeqon (Classical ML aur Deep Learning) ka amali farq bhi samajh aaye.</p>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 1 — Data Tayyar Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step1_prepare.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.utils <span class="tok-kw">import</span> to_categorical
+<span class="tok-kw">from</span> sklearn.preprocessing <span class="tok-kw">import</span> LabelEncoder
+
+encoder = LabelEncoder()
+y_encoded = encoder.fit_transform(y)          <span class="tok-com"># "setosa" -> 0, "versicolor" -> 1, ...</span>
+y_categorical = to_categorical(y_encoded)     <span class="tok-com"># one-hot: [1,0,0], [0,1,0] ...</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4-5</span> Neural Networks text labels nahi samajhte, isi liye <code>LabelEncoder</code> se species ke naam numbers mein badle.</li>
+      <li><span class="ln">L6</span> <code>to_categorical</code> un numbers ko one-hot vectors mein badalta hai — jo Softmax output layer ke sath match karta hai (Chapter 17).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 2 — Model Ka Architecture Design Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step2_architecture.py</span></div>
+    <pre><code><span class="tok-kw">from</span> tensorflow.keras.models <span class="tok-kw">import</span> Sequential
+<span class="tok-kw">from</span> tensorflow.keras.layers <span class="tok-kw">import</span> Dense
+
+model = Sequential([
+    Dense(<span class="tok-num">16</span>, activation=<span class="tok-str">"relu"</span>, input_shape=(<span class="tok-num">4</span>,)),  <span class="tok-com"># hidden layer 1</span>
+    Dense(<span class="tok-num">8</span>, activation=<span class="tok-str">"relu"</span>),                     <span class="tok-com"># hidden layer 2</span>
+    Dense(<span class="tok-num">3</span>, activation=<span class="tok-str">"softmax"</span>)                <span class="tok-com"># output: 3 species ki probability</span>
+])</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L4</span> Pehli hidden layer 4 input features leti hai (sepal/petal measurements), 16 neurons ke sath ReLU activation use karti hai.</li>
+      <li><span class="ln">L5</span> Doosri hidden layer aur gehrayi se patterns seekhti hai.</li>
+      <li><span class="ln">L6</span> Output layer mein 3 neurons hain (3 species ke liye), Softmax se har species ki probability milti hai (sabka total 100%).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 3 — Model Ko Compile Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step3_compile.py</span></div>
+    <pre><code>model.<span class="tok-fn">compile</span>(
+    optimizer=<span class="tok-str">"adam"</span>,                     <span class="tok-com"># weights update karne ka tareeqa</span>
+    loss=<span class="tok-str">"categorical_crossentropy"</span>,     <span class="tok-com"># multi-class error formula</span>
+    metrics=[<span class="tok-str">"accuracy"</span>]
+)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L2</span> <code>adam</code> optimizer — Gradient Descent ka ek smart, tez version jo khud-b-khud learning rate adjust karta hai.</li>
+      <li><span class="ln">L3</span> Multi-class classification (3+ categories) ke liye <code>categorical_crossentropy</code> loss use hoti hai.</li>
+      <li><span class="ln">L4</span> Training ke doran accuracy bhi track hogi taake progress dikhe.</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 4 — Training Loop Chalana</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step4_train.py</span></div>
+    <pre><code>history = model.fit(
+    X_train, y_train,
+    epochs=<span class="tok-num">50</span>,             <span class="tok-com"># poora data 50 baar dikhao</span>
+    batch_size=<span class="tok-num">8</span>,          <span class="tok-com"># 8-8 examples ke groups mein update karo</span>
+    validation_split=<span class="tok-num">0.2</span>   <span class="tok-com"># training data ka 20% validation ke liye alag rakho</span>
+)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L3</span> <code>epochs=50</code> — model poora training data 50 baar dekhega, har baar thora behtar hota jayega.</li>
+      <li><span class="ln">L4</span> <code>batch_size=8</code> — ek sath sab data ki jagah, 8-8 examples ka chhota batch dekh kar weights update honge (Chapter 18).</li>
+      <li><span class="ln">L5</span> <code>validation_split=0.2</code> — training ke doran hi ek chhota hissa alag rakh kar check karta rehta hai ke model overfit to nahi ho raha (Chapter 12).</li>
+    </ol>
+  </div>
+
+  <div class="diagram-box">
+    <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Orbitron" font-size="11" text-anchor="middle" fill="#eaf6ff">
+        <rect x="10" y="40" width="110" height="55" rx="10" fill="rgba(0,255,242,0.09)" stroke="#00fff2"/><text x="65" y="72">Forward Pass</text>
+        <rect x="150" y="40" width="110" height="55" rx="10" fill="rgba(255,0,229,0.09)" stroke="#ff00e5"/><text x="205" y="72">Calculate Loss</text>
+        <rect x="290" y="40" width="110" height="55" rx="10" fill="rgba(157,78,221,0.12)" stroke="#9d4edd"/><text x="345" y="72">Backpropagation</text>
+        <rect x="430" y="40" width="120" height="55" rx="10" fill="rgba(57,255,136,0.1)" stroke="#39ff88"/><text x="490" y="72">Update Weights</text>
+      </g>
+      <g stroke="#7d87a0" marker-end="url(#arrow8)">
+        <line x1="122" y1="67" x2="148" y2="67"/><line x1="262" y1="67" x2="288" y2="67"/><line x1="402" y1="67" x2="428" y2="67"/>
+      </g>
+      <path d="M490,95 C490,130 65,130 65,97" stroke="#ffd166" fill="none" stroke-dasharray="4 4" marker-end="url(#arrow8)"/>
+      <text x="280" y="140" text-anchor="middle" fill="#ffd166" font-size="10.5">Ye poora cycle har epoch mein repeat hota hai</text>
+      <defs><marker id="arrow8" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7d87a0"/></marker></defs>
+    </svg>
+    <p class="diagram-caption">Neural Network training loop — har epoch mein ye 4 steps repeat hote hain</p>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 5 — Test Data Par Evaluate Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step5_evaluate.py</span></div>
+    <pre><code>test_loss, test_accuracy = model.evaluate(X_test, y_test)
+<span class="tok-fn">print</span>(<span class="tok-str">"Test Accuracy:"</span>, test_accuracy)</code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> <code>.evaluate()</code> model ko un examples par check karta hai jo usne training mein bilkul nahi dekhe — asli imtihaan yehi hai.</li>
+      <li><span class="ln">L2</span> Test accuracy print ki — agar ye training accuracy se bohot kam ho to overfitting ka ishara hai (Chapter 12).</li>
+    </ol>
+  </div>
+
+  <h4 style="color:var(--neon-purple); margin-top:26px;">Step 6 — Model Ko Save Karna Aur Naye Data Par Predict Karna</h4>
+  <div class="code-box">
+    <div class="code-head"><span>python</span><span>nn_step6_save_predict.py</span></div>
+    <pre><code>model.save(<span class="tok-str">"iris_nn_model.h5"</span>)   <span class="tok-com"># poora model (architecture + weights) save karo</span>
+
+<span class="tok-kw">from</span> tensorflow.keras.models <span class="tok-kw">import</span> load_model
+loaded = load_model(<span class="tok-str">"iris_nn_model.h5"</span>)
+new_prediction = loaded.predict(X_test[:<span class="tok-num">1</span>])   <span class="tok-com"># pehla test example predict karo</span></code></pre>
+    <ol class="line-explain">
+      <li><span class="ln">L1</span> <code>.save()</code> se model ki poori structure aur seekhe hue weights ek file mein save ho jate hain.</li>
+      <li><span class="ln">L4</span> <code>load_model()</code> se yehi model kisi bhi doosre program (jaise Chapter 24 wali Flask API) mein wapas load kiya ja sakta hai.</li>
+      <li><span class="ln">L5</span> Naye/test data par prediction karwa kar dekha model asal mein kaam kar raha hai ya nahi.</li>
+    </ol>
+  </div>
+
+  <div class="why-box">
+    <span class="label">⚡ Ye seekhna kyun zaroori hai</span>
+    <p>Poore course mein humne concepts alag alag seekhe — lekin ek asli ML Engineer ka kaam hai in sab ko jorh kar shuru se aakhir tak ek naya model bana lena. Ye chapter wahi "haath se karke dikhana (hands-on)" hissa hai jo sirf padhne se nahi, khud likh kar aata hai. Dono tareeqe (Classical ML aur Neural Network) dikhane ka maqsad ye hai ke aap khud faisla kar sakein ke kis problem ke liye kaunsa tareeqa behtar hai.</p>
+  </div>
+
+  <div class="takeaway-box">
+    <span class="label">✅ Chapter Ka Khulasa</span>
+    <p>Naya model banane ka safar hamesha aik jaisa hota hai: Data → Prepare → Model Design → Train (.fit) → Evaluate → Save. Chahe Scikit-learn ho ya Keras, yehi bunyaadi steps har jagah dohraye jate hain — bas tools aur andar ki technique alag hoti hai.</p>
+  </div>
+</section>
+
+<section class="wrap chapter-section" id="ml-ethics">
+  <span class="chapter-tag"><span class="chapter-num">27</span> Category F — Practical &amp; Career</span>
   <h2>ML Ethics &amp; Best Practices</h2>
   <p>Machine Learning models real logon ki zindagi par asar dalte hain — job applications, loan approvals, medical diagnosis. Isi liye ML ko zimmedari (responsibility) ke sath banana bohot zaroori hai.</p>
 
@@ -1874,7 +2149,7 @@ model = joblib.load(<span class="tok-str">"house_price_model.pkl"</span>)
 </section>
 
 <section class="wrap chapter-section" id="career-roadmap">
-  <span class="chapter-tag"><span class="chapter-num">27</span> Category F — Practical &amp; Career</span>
+  <span class="chapter-tag"><span class="chapter-num">28</span> Category F — Practical &amp; Career</span>
   <h2>Career Roadmap &amp; Next Steps</h2>
   <p>Mubarak ho — agar aap yahan tak pohanch gaye hain, to aapne ek complete ML foundation cover kar li hai! Ab agla sawal: <strong>"Aage kya karein?"</strong></p>
 
@@ -1907,6 +2182,27 @@ model = joblib.load(<span class="tok-str">"house_price_model.pkl"</span>)
 
 
 <footer>
+  <div class="footer-logo-row">
+    <svg width="76" height="76" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="94" fill="rgba(255,255,255,0.04)" stroke="#39ff88" stroke-width="3"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+      <g stroke="#39ff88" stroke-width="3" fill="#39ff88">
+        <circle cx="32" cy="52" r="4"/><circle cx="32" cy="78" r="4"/>
+        <line x1="32" y1="52" x2="54" y2="52"/><line x1="32" y1="78" x2="48" y2="78"/>
+      </g>
+      <text x="100" y="128" text-anchor="middle" font-family="Orbitron" font-weight="900" font-size="72" fill="#eaf6ff">SIPK</text>
+      <g transform="translate(93,92)">
+        <circle cx="0" cy="0" r="12" fill="#39ff88"/>
+        <circle cx="5" cy="-4" r="10" fill="#05050f"/>
+        <text x="15" y="-4" font-size="11" fill="#39ff88">★</text>
+      </g>
+      <text x="152" y="152" font-family="Courier New" font-size="20" font-weight="700" fill="#39ff88">&lt;/&gt;</text>
+    </svg>
+    <div class="sipk-name">SAIPK<span class="g">@support</span></div>
+    <div class="sipk-tag">IT Tools • Web Solutions • Support</div>
+    <div class="sipk-tag" style="opacity:.7;">Building Tools. Solving Problems.</div>
+  </div>
+
   <span class="holo-text">ML MASTERY</span>
   Banaya gaya hai un logon ke liye jo Machine Learning ko zero se seekhna chahte hain — asan lafzon mein, poori tafseel ke saath.<br>
   Har code line explain ki gayi hai taake sirf "copy-paste" nahi, balke "samajh kar likhna" seekhein.
@@ -1931,4 +2227,19 @@ const links=document.querySelectorAll('#sidebar a[href^="#"]');
 const sections=[...links].map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
 function onScroll(){
   const scrollTop=window.scrollY;
-  const docHeight=document.documen
+  const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progressBar').style.width=(docHeight>0?(scrollTop/docHeight*100):0)+'%';
+
+  let current=sections[0];
+  for(const sec of sections){
+    if(sec.getBoundingClientRect().top-120<=0) current=sec;
+  }
+  links.forEach(a=>a.classList.remove('active'));
+  const match=[...links].find(a=>document.querySelector(a.getAttribute('href'))===current);
+  if(match) match.classList.add('active');
+}
+window.addEventListener('scroll',onScroll);
+onScroll();
+</script>
+</body>
+</html>
